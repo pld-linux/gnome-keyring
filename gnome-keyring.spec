@@ -17,7 +17,7 @@ BuildRequires:	libtool
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-Gnome Keyring is a program that keeps password and other secrets for
+GNOME Keyring is a program that keeps password and other secrets for
 users. It is run as a deamon in the session, similar to ssh-agent, and
 other applications can locate it by an environment variable.
 
@@ -25,7 +25,7 @@ The library libgnome-keyring is used by applications to integrate with
 the GNOME keyring system.
 
 %description -l pl
-Gnome Keyring to program do przechowywania hase³ i innych tajnych
+GNOME Keyring to program do przechowywania hase³ i innych tajnych
 danych u¿ytkowników. Dzia³a jako demon w sesji, podobnie do
 ssh-agenta, a inne aplikacje mog± znale¼æ go poprzez zmienn±
 ¶rodowiskow±.
@@ -34,40 +34,40 @@ Biblioteka libgnome-keyring jest u¿ywana przez aplikacje do integracji
 z systemem kluczy GNOME.
 
 %package libs
-Summary:	Gnome keyring library
-Summary(pl):	Biblioteka gnome keyring
+Summary:	GNOME keyring library
+Summary(pl):	Biblioteka GNOME keyring
 Group:		Libraries
 
 %description libs
-Gnome keyring library.
+GNOME keyring library.
 
 %description libs -l pl
-Biblioteka gnome keyring.
+Biblioteka GNOME keyring.
 
 %package devel
-Summary:	Headers for gnome keyring library
-Summary(pl):	Pliki nag³ówkowe biblioteki gnome keyring
+Summary:	Headers for GNOME keyring library
+Summary(pl):	Pliki nag³ówkowe biblioteki GNOME keyring
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	glib2-devel >= 1:2.4.4
 
 %description devel
-Headers for gnome keyring library.
+Headers for GNOME keyring library.
 
 %description devel -l pl
-Pliki nag³ówkowe biblioteki gnome keyring.
+Pliki nag³ówkowe biblioteki GNOME keyring.
 
 %package static
-Summary:	Static gnome keyring libraries
-Summary(pl):	Statyczne biblioteki gnome keyring
+Summary:	Static GNOME keyring libraries
+Summary(pl):	Statyczne biblioteki GNOME keyring
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
-Static version of gnome keyring libraries.
+Static versions of GNOME keyring libraries.
 
 %description static -l pl
-Statyczne biblioteki gnome keyring.
+Statyczne biblioteki GNOME keyring.
 
 %prep
 %setup -q
