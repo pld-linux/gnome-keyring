@@ -1,15 +1,19 @@
 Summary:	Keep passwords and other user's secrets
 Summary(pl):	Przechowywanie hase³ i innych tajnych danych u¿ytkowników
 Name:		gnome-keyring
-Version:	0.1.4
+Version:	0.1.90
 Release:	1
 License:	LGPL v2+/GPL v2+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/0.1/%{name}-%{version}.tar.bz2
-# Source0-md5:	ef5417fc3fd7a30cc0911b4b0ae05035
+# Source0-md5:	ae2d467e266b3a96c09ba167a2bacb2c
+Patch0:		%{name}-locale-names.patch
 URL:		http://www.gnome.org/
-BuildRequires:	glib2-devel >= 2.3.2
-BuildRequires:	gtk+2-devel >= 2.3.2
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	glib2-devel >= 2.3.5
+BuildRequires:	gtk+2-devel >= 2.3.5
+BuildRequires:	libtool
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -44,8 +48,8 @@ Biblioteka gnome keyring.
 Summary:	Headers for gnome keyring library
 Summary(pl):	Pliki nag³ówkowe biblioteki gnome keyring
 Group:		Development/Libraries
-Requires:	%{name}-libs = %{version}
-Requires:	glib2-devel >= 2.3.2
+Requires:	%{name}-libs = %{version}-%{release}
+Requires:	glib2-devel >= 2.3.5
 
 %description devel
 Headers for gnome keyring library.
@@ -57,7 +61,7 @@ Pliki nag³ówkowe biblioteki gnome keyring.
 Summary:	Static gnome keyring libraries
 Summary(pl):	Statyczne biblioteki gnome keyring
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}
+Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Static version of gnome keyring libraries.
@@ -67,8 +71,15 @@ Statyczne biblioteki gnome keyring.
 
 %prep
 %setup -q
+%patch0 -p1
+
+mv po/{no,nb}.po
 
 %build
+%{__libtoolize}
+%{__aclocal}
+%{__autoconf}
+%{__automake}
 %configure \
 	--enable-static 
 
