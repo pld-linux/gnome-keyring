@@ -1,12 +1,12 @@
 Summary:	Keep passwords and other user's secrets
 Summary(pl):	Przechowywanie hase³ i innych tajnych danych u¿ytkowników
 Name:		gnome-keyring
-Version:	0.1
-Release:	2
+Version:	0.1.1
+Release:	1
 License:	LGPL v2+/GPL v2+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/0.1/%{name}-%{version}.tar.bz2
-# Source0-md5:	82dda41896256f7f687ab6d8b296a3c0
+# Source0-md5:	f8cd52d1ae6b8c3813c138a0751f4f64
 URL:		http://www.gnome.org/
 BuildRequires:	glib2-devel >= 2.3.1
 BuildRequires:	gtk+2-devel >= 2.3.1
@@ -76,7 +76,6 @@ Statyczne biblioteki gnome keyring.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_datadir}/gnome/help
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
@@ -87,12 +86,12 @@ install -d $RPM_BUILD_ROOT%{_datadir}/gnome/help
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post   -p /sbin/ldconfig
-%postun -p /sbin/ldconfig
+%post   libs -p /sbin/ldconfig
+%postun libs -p /sbin/ldconfig
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog NEWS README
+%doc AUTHORS ChangeLog NEWS README TODO
 %attr(755,root,root) %{_bindir}/*
 
 %files libs
