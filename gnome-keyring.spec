@@ -1,18 +1,18 @@
 Summary:	Keep passwords and other user's secrets
 Summary(pl):	Przechowywanie hase³ i innych tajnych danych u¿ytkowników
 Name:		gnome-keyring
-Version:	0.1.90
+Version:	0.1.91
 Release:	1
 License:	LGPL v2+/GPL v2+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/0.1/%{name}-%{version}.tar.bz2
-# Source0-md5:	ae2d467e266b3a96c09ba167a2bacb2c
+# Source0-md5:	3be456f27c7f86ebb73d5aac5e86dcb5
 Patch0:		%{name}-locale-names.patch
 URL:		http://www.gnome.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	glib2-devel >= 2.3.5
-BuildRequires:	gtk+2-devel >= 2.3.5
+BuildRequires:	glib2-devel >= 2.3.6
+BuildRequires:	gtk+2-devel >= 2:2.3.6
 BuildRequires:	libtool
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -49,7 +49,7 @@ Summary:	Headers for gnome keyring library
 Summary(pl):	Pliki nag³ówkowe biblioteki gnome keyring
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
-Requires:	glib2-devel >= 2.3.5
+Requires:	glib2-devel >= 2.3.6
 
 %description devel
 Headers for gnome keyring library.
