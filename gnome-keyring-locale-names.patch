@@ -1,0 +1,12 @@
+diff -urN aa/gnome-keyring-0.1.90/configure.in gnome-keyring-0.1.90/configure.in
+--- aa/gnome-keyring-0.1.90/configure.in	2004-03-08 12:25:30.000000000 +0100
++++ gnome-keyring-0.1.90/configure.in	2004-03-08 13:20:39.317669576 +0100
+@@ -33,7 +33,7 @@
+ AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [The gettext domain name])
+ AC_SUBST(GETTEXT_PACKAGE)
+ 
+-ALL_LINGUAS="ar az cs da de el es fi fr hr it ja ko lt mn no ms pl pt sk sq sr sr@Latn sv th"
++ALL_LINGUAS="ar az cs da de el es fi fr hr it ja ko lt mn ms nb pl pt sk sq sr sr@Latn sv th"
+ AM_GLIB_GNU_GETTEXT
+ 
+ dnl check for socklen_t
