@@ -1,27 +1,38 @@
 Summary:	Keep passwords and other user's secrets
+Summary(pl):	Przechowywanie hase³ i innych tajnych danych u¿ytkowników
 Name:		gnome-keyring
 Version:	0.1
 Release:	2
 License:	LGPL v2+/GPL v2+
-Group:		Libraries
+Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/0.1/%{name}-%{version}.tar.bz2
 # Source0-md5:	82dda41896256f7f687ab6d8b296a3c0
 URL:		http://www.gnome.org/
 BuildRequires:	glib2-devel >= 2.3.1
+BuildRequires:	gtk+2-devel >= 2.3.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 Gnome Keyring is a program that keeps password and other secrets for
-users. It is run as a damon in the session, similar to ssh-agent, and
+users. It is run as a deamon in the session, similar to ssh-agent, and
 other applications can locate it by an environment variable.
 
 The library libgnome-keyring is used by applications to integrate with
-the gnome keyring system.
+the GNOME keyring system.
+
+%description -l pl
+Gnome Keyring to program do przechowywania hase³ i innych tajnych
+danych u¿ytkowników. Dzia³a jako demon w sesji, podobnie do
+ssh-agenta, a inne aplikacje mog± znale¼æ go poprzez zmienn±
+¶rodowiskow±.
+
+Biblioteka libgnome-keyring jest u¿ywana przez aplikacje do integracji
+z systemem kluczy GNOME.
 
 %package libs
 Summary:	Gnome keyring library
 Summary(pl):	Biblioteka gnome keyring
-Group:		X11/Development/Libraries
+Group:		Libraries
 
 %description libs
 Gnome keyring library.
@@ -32,9 +43,8 @@ Biblioteka gnome keyring.
 %package devel
 Summary:	Headers for gnome keyring library
 Summary(pl):	Pliki nag³ówkowe biblioteki gnome keyring
-Group:		X11/Development/Libraries
+Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}
-Requires:	gtk+2-devel >= 2.3.1
 Requires:	glib2-devel >= 2.3.1
 
 %description devel
@@ -46,7 +56,7 @@ Pliki nag³ówkowe biblioteki gnome keyring.
 %package static
 Summary:	Static gnome keyring libraries
 Summary(pl):	Statyczne biblioteki gnome keyring
-Group:		X11/Development/Libraries
+Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}
 
 %description static
