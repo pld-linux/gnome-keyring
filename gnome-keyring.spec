@@ -1,12 +1,12 @@
 Summary:	Keep passwords and other user's secrets
 Summary(pl):	Przechowywanie hase³ i innych tajnych danych u¿ytkowników
 Name:		gnome-keyring
-Version:	0.4.6
+Version:	0.4.7
 Release:	1
 License:	LGPL v2+/GPL v2+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/gnome/sources/gnome-keyring/0.4/%{name}-%{version}.tar.bz2
-# Source0-md5:	7d94fc9598035ea1a92f4e777dfc4194
+# Source0-md5:	6c760ec2783ce02152ac9d8ef4471a41
 URL:		http://www.gnome.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
