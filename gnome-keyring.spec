@@ -18,7 +18,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 GNOME Keyring is a program that keeps password and other secrets for
-users. It is run as a deamon in the session, similar to ssh-agent, and
+users. It is run as a daemon in the session, similar to ssh-agent, and
 other applications can locate it by an environment variable.
 
 The library libgnome-keyring is used by applications to integrate with
