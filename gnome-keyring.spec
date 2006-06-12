@@ -1,18 +1,19 @@
 Summary:	Keep passwords and other user's secrets
 Summary(pl):	Przechowywanie hase³ i innych tajnych danych u¿ytkowników
 Name:		gnome-keyring
-Version:	0.4.9
-Release:	3
+Version:	0.5.1
+Release:	1
 License:	LGPL v2+/GPL v2+
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/gnome/sources/gnome-keyring/0.4/%{name}-%{version}.tar.bz2
-# Source0-md5:	9a90820acf11a66e4c3dd9e163231071
+Source0:	http://ftp.gnome.org/pub/gnome/sources/gnome-keyring/0.5/%{name}-%{version}.tar.bz2
+# Source0-md5:	63e3614d864198d7793b1dba9189e992
 Patch0:		%{name}-single-unlock-dialog.patch
 URL:		http://www.gnome.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	glib2-devel >= 1:2.11.1
-BuildRequires:	gtk+2-devel >= 2:2.9.1
+BuildRequires:	glib2-devel >= 1:2.11.3
+BuildRequires:	gtk+2-devel >= 2:2.9.2
+BuildRequires:	gtk-doc >= 1.6
 BuildRequires:	libtool
 BuildRequires:	rpmbuild(macros) >= 1.197
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -80,8 +81,9 @@ Statyczne biblioteki GNOME keyring.
 %{__autoconf}
 %{__automake}
 %configure \
-	--enable-static 
-
+	--enable-gtk-doc \
+	--enable-static \
+	--with-html-dir=%{_gtkdocdir}
 %{__make}
 
 %install
@@ -90,8 +92,6 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	pkgconfigdir=%{_pkgconfigdir}
-
-rm -r $RPM_BUILD_ROOT%{_datadir}/locale/no
 
 %find_lang %{name} --with-gnome --all-name
 
@@ -115,8 +115,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/lib*.so
 %{_libdir}/lib*.la
-%{_pkgconfigdir}/*.pc
 %{_includedir}/*
+%{_pkgconfigdir}/*.pc
+%{_gtkdocdir}/%{name}
 
 %files static
 %defattr(644,root,root,755)
