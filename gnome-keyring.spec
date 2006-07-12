@@ -2,7 +2,7 @@ Summary:	Keep passwords and other user's secrets
 Summary(pl):	Przechowywanie hase³ i innych tajnych danych u¿ytkowników
 Name:		gnome-keyring
 Version:	0.5.1
-Release:	1
+Release:	2
 License:	LGPL v2+/GPL v2+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/gnome/sources/gnome-keyring/0.5/%{name}-%{version}.tar.bz2
@@ -11,8 +11,8 @@ Patch0:		%{name}-single-unlock-dialog.patch
 URL:		http://www.gnome.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	glib2-devel >= 1:2.11.3
-BuildRequires:	gtk+2-devel >= 2:2.9.2
+BuildRequires:	glib2-devel >= 1:2.12.0
+BuildRequires:	gtk+2-devel >= 2:2.10.0
 BuildRequires:	gtk-doc >= 1.6
 BuildRequires:	libtool
 BuildRequires:	rpmbuild(macros) >= 1.197
@@ -51,7 +51,7 @@ Summary:	Headers for GNOME keyring library
 Summary(pl):	Pliki nag³ówkowe biblioteki GNOME keyring
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
-Requires:	glib2-devel >= 1:2.6.3
+Requires:	glib2-devel >= 1:2.10.0
 
 %description devel
 Headers for GNOME keyring library.
@@ -80,6 +80,7 @@ Statyczne biblioteki GNOME keyring.
 %{__aclocal}
 %{__autoconf}
 %{__automake}
+LDFLAGS="%{rpmldflags} -Wl,--as-needed"
 %configure \
 	--enable-gtk-doc \
 	--enable-static \
