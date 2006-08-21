@@ -1,19 +1,18 @@
 Summary:	Keep passwords and other user's secrets
 Summary(pl):	Przechowywanie hase³ i innych tajnych danych u¿ytkowników
 Name:		gnome-keyring
-Version:	0.5.1
-Release:	2
+Version:	0.5.2
+Release:	1
 License:	LGPL v2+/GPL v2+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/gnome/sources/gnome-keyring/0.5/%{name}-%{version}.tar.bz2
-# Source0-md5:	63e3614d864198d7793b1dba9189e992
+# Source0-md5:	19b9fb4330ebbfdd22e63006a49ae3f7
 Patch0:		%{name}-single-unlock-dialog.patch
 URL:		http://www.gnome.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	glib2-devel >= 1:2.12.0
-BuildRequires:	gtk+2-devel >= 2:2.10.0
-BuildRequires:	gtk-doc >= 1.6
+BuildRequires:	gtk+2-devel >= 2:2.10.2
+BuildRequires:	gtk-doc >= 1.7
 BuildRequires:	libtool
 BuildRequires:	rpmbuild(macros) >= 1.197
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -71,6 +70,18 @@ Static versions of GNOME keyring libraries.
 %description static -l pl
 Statyczne biblioteki GNOME keyring.
 
+%package apidocs
+Summary:	GNOME keyring API documentation
+Summary(pl):	Dokumentacja API GNOME keyring
+Group:		Documentation
+Requires:	gtk-doc-common
+
+%description apidocs
+GNOME keyring API documentation.
+
+%description apidocs -l pl
+Dokumentacja API GNOME keyring.
+
 %prep
 %setup -q
 %patch0 -p0
@@ -80,7 +91,6 @@ Statyczne biblioteki GNOME keyring.
 %{__aclocal}
 %{__autoconf}
 %{__automake}
-LDFLAGS="%{rpmldflags} -Wl,--as-needed"
 %configure \
 	--enable-gtk-doc \
 	--enable-static \
@@ -118,8 +128,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/lib*.la
 %{_includedir}/*
 %{_pkgconfigdir}/*.pc
-%{_gtkdocdir}/%{name}
 
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/lib*.a
+
+%files apidocs
+%defattr(644,root,root,755)
+%{_gtkdocdir}/%{name}
