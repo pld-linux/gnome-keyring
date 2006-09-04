@@ -1,12 +1,12 @@
 Summary:	Keep passwords and other user's secrets
 Summary(pl):	Przechowywanie hase³ i innych tajnych danych u¿ytkowników
 Name:		gnome-keyring
-Version:	0.5.2
+Version:	0.6.0
 Release:	1
 License:	LGPL v2+/GPL v2+
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/gnome/sources/gnome-keyring/0.5/%{name}-%{version}.tar.bz2
-# Source0-md5:	19b9fb4330ebbfdd22e63006a49ae3f7
+Source0:	http://ftp.gnome.org/pub/gnome/sources/gnome-keyring/0.6/%{name}-%{version}.tar.bz2
+# Source0-md5:	1e3a3a12b19fc5ebe95363658c2256d8
 Patch0:		%{name}-single-unlock-dialog.patch
 URL:		http://www.gnome.org/
 BuildRequires:	autoconf
@@ -50,7 +50,7 @@ Summary:	Headers for GNOME keyring library
 Summary(pl):	Pliki nag³ówkowe biblioteki GNOME keyring
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
-Requires:	glib2-devel >= 1:2.10.0
+Requires:	glib2-devel >= 1:2.10.3
 
 %description devel
 Headers for GNOME keyring library.
