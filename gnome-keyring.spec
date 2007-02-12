@@ -3,7 +3,7 @@
 # - check if Patch0 is needed
 #
 Summary:	Keep passwords and other user's secrets
-Summary(pl):	Przechowywanie hase≥ i innych tajnych danych uøytkownikÛw
+Summary(pl.UTF-8):   Przechowywanie hase≈Ç i innych tajnych danych u≈ºytkownik√≥w
 Name:		gnome-keyring
 Version:	0.7.3
 Release:	0.1
@@ -29,29 +29,29 @@ other applications can locate it by an environment variable.
 The library libgnome-keyring is used by applications to integrate with
 the GNOME keyring system.
 
-%description -l pl
-GNOME Keyring to program do przechowywania hase≥ i innych tajnych
-danych uøytkownikÛw. Dzia≥a jako demon w sesji, podobnie do
-ssh-agenta, a inne aplikacje mog± znaleºÊ go poprzez zmienn±
-∂rodowiskow±.
+%description -l pl.UTF-8
+GNOME Keyring to program do przechowywania hase≈Ç i innych tajnych
+danych u≈ºytkownik√≥w. Dzia≈Ça jako demon w sesji, podobnie do
+ssh-agenta, a inne aplikacje mogƒÖ znale≈∫ƒá go poprzez zmiennƒÖ
+≈õrodowiskowƒÖ.
 
-Biblioteka libgnome-keyring jest uøywana przez aplikacje do integracji
+Biblioteka libgnome-keyring jest u≈ºywana przez aplikacje do integracji
 z systemem kluczy GNOME.
 
 %package libs
 Summary:	GNOME keyring library
-Summary(pl):	Biblioteka GNOME keyring
+Summary(pl.UTF-8):   Biblioteka GNOME keyring
 Group:		Libraries
 
 %description libs
 GNOME keyring library.
 
-%description libs -l pl
+%description libs -l pl.UTF-8
 Biblioteka GNOME keyring.
 
 %package devel
 Summary:	Headers for GNOME keyring library
-Summary(pl):	Pliki nag≥Ûwkowe biblioteki GNOME keyring
+Summary(pl.UTF-8):   Pliki nag≈Ç√≥wkowe biblioteki GNOME keyring
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	glib2-devel >= 1:2.10.3
@@ -59,31 +59,31 @@ Requires:	glib2-devel >= 1:2.10.3
 %description devel
 Headers for GNOME keyring library.
 
-%description devel -l pl
-Pliki nag≥Ûwkowe biblioteki GNOME keyring.
+%description devel -l pl.UTF-8
+Pliki nag≈Ç√≥wkowe biblioteki GNOME keyring.
 
 %package static
 Summary:	Static GNOME keyring libraries
-Summary(pl):	Statyczne biblioteki GNOME keyring
+Summary(pl.UTF-8):   Statyczne biblioteki GNOME keyring
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Static versions of GNOME keyring libraries.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Statyczne biblioteki GNOME keyring.
 
 %package apidocs
 Summary:	GNOME keyring API documentation
-Summary(pl):	Dokumentacja API GNOME keyring
+Summary(pl.UTF-8):   Dokumentacja API GNOME keyring
 Group:		Documentation
 Requires:	gtk-doc-common
 
 %description apidocs
 GNOME keyring API documentation.
 
-%description apidocs -l pl
+%description apidocs -l pl.UTF-8
 Dokumentacja API GNOME keyring.
 
 %prep
