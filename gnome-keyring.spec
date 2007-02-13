@@ -3,7 +3,7 @@
 # - check if Patch0 is needed
 #
 Summary:	Keep passwords and other user's secrets
-Summary(pl.UTF-8):   Przechowywanie haseł i innych tajnych danych użytkowników
+Summary(pl.UTF-8):	Przechowywanie haseł i innych tajnych danych użytkowników
 Name:		gnome-keyring
 Version:	0.7.3
 Release:	0.1
@@ -40,7 +40,7 @@ z systemem kluczy GNOME.
 
 %package libs
 Summary:	GNOME keyring library
-Summary(pl.UTF-8):   Biblioteka GNOME keyring
+Summary(pl.UTF-8):	Biblioteka GNOME keyring
 Group:		Libraries
 
 %description libs
@@ -51,7 +51,7 @@ Biblioteka GNOME keyring.
 
 %package devel
 Summary:	Headers for GNOME keyring library
-Summary(pl.UTF-8):   Pliki nagłówkowe biblioteki GNOME keyring
+Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki GNOME keyring
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	glib2-devel >= 1:2.10.3
@@ -64,7 +64,7 @@ Pliki nagłówkowe biblioteki GNOME keyring.
 
 %package static
 Summary:	Static GNOME keyring libraries
-Summary(pl.UTF-8):   Statyczne biblioteki GNOME keyring
+Summary(pl.UTF-8):	Statyczne biblioteki GNOME keyring
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
@@ -76,7 +76,7 @@ Statyczne biblioteki GNOME keyring.
 
 %package apidocs
 Summary:	GNOME keyring API documentation
-Summary(pl.UTF-8):   Dokumentacja API GNOME keyring
+Summary(pl.UTF-8):	Dokumentacja API GNOME keyring
 Group:		Documentation
 Requires:	gtk-doc-common
 
