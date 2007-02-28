@@ -1,23 +1,21 @@
-#
-# TODO:
-# - check if Patch0 is needed
-#
 Summary:	Keep passwords and other user's secrets
 Summary(pl.UTF-8):	Przechowywanie haseł i innych tajnych danych użytkowników
 Name:		gnome-keyring
-Version:	0.7.3
-Release:	0.1
+Version:	0.7.92
+Release:	1
 License:	LGPL v2+/GPL v2+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/gnome/sources/gnome-keyring/0.7/%{name}-%{version}.tar.bz2
-# Source0-md5:	4478d21d3ef56a3992411bee7ab6df73
-Patch0:		%{name}-single-unlock-dialog.patch
+# Source0-md5:	ba7acfe9a8acd9bfdb97f403a42a162e
 URL:		http://www.gnome.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	gtk+2-devel >= 2:2.10.2
-BuildRequires:	gtk-doc >= 1.7
+BuildRequires:	dbus-devel >= 1.0.2
+BuildRequires:	gtk+2-devel >= 2:2.10.9
+BuildRequires:	gtk-doc >= 1.8
+BuildRequires:	intltool >= 0.35.5
 BuildRequires:	libtool
+BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.197
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -54,7 +52,8 @@ Summary:	Headers for GNOME keyring library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki GNOME keyring
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
-Requires:	glib2-devel >= 1:2.10.3
+Requires:	dbus-devel >= 1.0.2
+Requires:	glib2-devel >= 1:2.10.9
 
 %description devel
 Headers for GNOME keyring library.
@@ -88,9 +87,10 @@ Dokumentacja API GNOME keyring.
 
 %prep
 %setup -q
-#%patch0 -p0
 
 %build
+%{__glib_gettextize}
+%{__intltoolize}
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
