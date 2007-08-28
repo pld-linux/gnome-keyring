@@ -9,7 +9,7 @@ Release:	1
 License:	LGPL v2+/GPL v2+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-keyring/2.19/%{name}-%{version}.tar.bz2
-# Source0-md5:	24b15dedcf40c1c60d0fb989370d80ff
+# Source0-md5:	31859dc08b8034fe95a32d461904ce52
 URL:		http://www.gnome.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
