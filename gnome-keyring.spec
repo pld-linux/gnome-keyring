@@ -1,6 +1,3 @@
-# TODO:
-# - pl for pam subpackage
-#
 Summary:	Keep passwords and other user's secrets
 Summary(pl.UTF-8):	Przechowywanie haseł i innych tajnych danych użytkowników
 Name:		gnome-keyring
@@ -94,12 +91,17 @@ Dokumentacja API GNOME keyring.
 
 %package pam
 Summary:	A PAM module for unlocking keyrings at login time
+Summary(pl.UTF-8):	Moduł PAM do odblokowywania zbiorów kluczy w czasie logowania
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description pam
 A PAM module that can automatically unlock the "login" keyring when
 the user logs in and start the keyring daemon.
+
+%description pam -l pl.UTF-8
+Moduł PAM, który może automatycznie odblokowywać zbiór kluczy "login"
+w czasie logowania użytkownika i uruchamiania demona keyring.
 
 %prep
 %setup -q
