@@ -1,20 +1,24 @@
 Summary:	Keep passwords and other user's secrets
 Summary(pl.UTF-8):	Przechowywanie haseł i innych tajnych danych użytkowników
 Name:		gnome-keyring
-Version:	0.8.1
+Version:	2.20
 Release:	1
 License:	LGPL v2+/GPL v2+
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/gnome/sources/gnome-keyring/0.8/%{name}-%{version}.tar.bz2
-# Source0-md5:	24b15dedcf40c1c60d0fb989370d80ff
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-keyring/2.20/%{name}-%{version}.tar.bz2
+# Source0-md5:	f37c71974323cc79f59e274d97110047
 URL:		http://www.gnome.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	dbus-devel >= 1.0.2
-BuildRequires:	gtk+2-devel >= 2:2.10.10
+BuildRequires:	gettext-devel
+BuildRequires:	gtk+2-devel >= 2:2.12.0
 BuildRequires:	gtk-doc >= 1.8
-BuildRequires:	intltool >= 0.35.5
+BuildRequires:	hal-devel >= 0.5.9
+BuildRequires:	intltool >= 0.36.2
+BuildRequires:	libgcrypt-devel >= 1.2.2
 BuildRequires:	libtool
+BuildRequires:	pam-devel
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.197
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -53,7 +57,7 @@ Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki GNOME keyring
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	dbus-devel >= 1.0.2
-Requires:	glib2-devel >= 1:2.10.11
+Requires:	glib2-devel >= 1:2.14.1
 
 %description devel
 Headers for GNOME keyring library.
@@ -85,6 +89,20 @@ GNOME keyring API documentation.
 %description apidocs -l pl.UTF-8
 Dokumentacja API GNOME keyring.
 
+%package pam
+Summary:	A PAM module for unlocking keyrings at login time
+Summary(pl.UTF-8):	Moduł PAM do odblokowywania zbiorów kluczy w czasie logowania
+Group:		Libraries
+Requires:	%{name} = %{version}-%{release}
+
+%description pam
+A PAM module that can automatically unlock the "login" keyring when
+the user logs in and start the keyring daemon.
+
+%description pam -l pl.UTF-8
+Moduł PAM, który może automatycznie odblokowywać zbiór kluczy "login"
+w czasie logowania użytkownika i uruchamiania demona keyring.
+
 %prep
 %setup -q
 
@@ -98,15 +116,18 @@ Dokumentacja API GNOME keyring.
 %configure \
 	--enable-gtk-doc \
 	--enable-static \
-	--with-html-dir=%{_gtkdocdir}
+	--with-html-dir=%{_gtkdocdir} \
+	--with-pam-dir=/%{_lib}/security
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} install \
+%{__make} install install-pam \
 	DESTDIR=$RPM_BUILD_ROOT \
 	pkgconfigdir=%{_pkgconfigdir}
+
+rm -f $RPM_BUILD_ROOT%{_libdir}/pam_gnome_keyring*
 
 %find_lang %{name} --with-gnome --all-name
 
@@ -140,3 +161,7 @@ rm -rf $RPM_BUILD_ROOT
 %files apidocs
 %defattr(644,root,root,755)
 %{_gtkdocdir}/%{name}
+
+%files pam
+%defattr(644,root,root,755)
+%attr(755,root,root) /%{_lib}/security/pam_gnome_keyring*.so
