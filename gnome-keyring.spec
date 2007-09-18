@@ -10,7 +10,7 @@ Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-keyring/2.20/%{name}-%{ver
 URL:		http://www.gnome.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	dbus-devel >= 1.0.2
+BuildRequires:	dbus-devel >= 1.1.2
 BuildRequires:	gettext-devel
 BuildRequires:	gtk+2-devel >= 2:2.12.0
 BuildRequires:	gtk-doc >= 1.8
@@ -21,6 +21,7 @@ BuildRequires:	libtool
 BuildRequires:	pam-devel
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.197
+Requires:	dbus >= 1.1.2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -56,7 +57,7 @@ Summary:	Headers for GNOME keyring library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki GNOME keyring
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
-Requires:	dbus-devel >= 1.0.2
+Requires:	dbus-devel >= 1.1.2
 Requires:	glib2-devel >= 1:2.14.1
 
 %description devel
