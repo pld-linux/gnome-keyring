@@ -1,22 +1,22 @@
 Summary:	Keep passwords and other user's secrets
 Summary(pl.UTF-8):	Przechowywanie haseł i innych tajnych danych użytkowników
 Name:		gnome-keyring
-Version:	2.21.5
+Version:	2.21.91
 Release:	1
 License:	LGPL v2+ (library), GPL v2+ (programs)
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-keyring/2.21/%{name}-%{version}.tar.bz2
-# Source0-md5:	1d8c03ea4a1e704d2e407d79f4d808d1
-URL:		http://www.gnome.org/
-BuildRequires:	GConf2-devel >= 2.21.1
+# Source0-md5:	31551620850dabc894fbf226835489a4
+URL:		http://live.gnome.org/GnomeKeyring
+BuildRequires:	GConf2-devel >= 2.21.90
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	dbus-devel >= 1.1.2
 BuildRequires:	gettext-devel
-BuildRequires:	gtk+2-devel >= 2:2.12.0
+BuildRequires:	gtk+2-devel >= 2:2.12.5
 BuildRequires:	gtk-doc >= 1.8
 BuildRequires:	hal-devel >= 0.5.10
-BuildRequires:	intltool >= 0.36.2
+BuildRequires:	intltool >= 0.37.0
 BuildRequires:	libgcrypt-devel >= 1.2.2
 BuildRequires:	libtasn1-devel
 BuildRequires:	libtool
@@ -68,7 +68,7 @@ License:	LGPL v2+
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	dbus-devel >= 1.1.2
-Requires:	glib2-devel >= 1:2.15.2
+Requires:	glib2-devel >= 1:2.15.4
 
 %description devel
 Headers for GNOME keyring library.
