@@ -1,30 +1,36 @@
 Summary:	Keep passwords and other user's secrets
 Summary(pl.UTF-8):	Przechowywanie haseł i innych tajnych danych użytkowników
 Name:		gnome-keyring
-Version:	2.20.3
+Version:	2.22.0
 Release:	1
 License:	LGPL v2+ (library), GPL v2+ (programs)
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-keyring/2.20/%{name}-%{version}.tar.bz2
-# Source0-md5:	2205177a168e745fa803c96a4fb62102
-URL:		http://www.gnome.org/
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-keyring/2.22/%{name}-%{version}.tar.bz2
+# Source0-md5:	d27c5bf11579069eb694f93b71364bb4
+URL:		http://live.gnome.org/GnomeKeyring
+BuildRequires:	GConf2-devel >= 2.22.0
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	dbus-devel >= 1.1.2
 BuildRequires:	gettext-devel
-BuildRequires:	gtk+2-devel >= 2:2.12.0
+BuildRequires:	gtk+2-devel >= 2:2.12.8
 BuildRequires:	gtk-doc >= 1.8
-BuildRequires:	hal-devel >= 0.5.9
-BuildRequires:	intltool >= 0.36.2
+BuildRequires:	hal-devel >= 0.5.10
+BuildRequires:	intltool >= 0.37.0
 BuildRequires:	libgcrypt-devel >= 1.2.2
+BuildRequires:	libtasn1-devel
 BuildRequires:	libtool
 BuildRequires:	pam-devel
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.197
+BuildRequires:	sed >= 4.0
+Requires(post,preun):	GConf2
 Requires:	dbus >= 1.1.2
 # sr@Latn vs. sr@latin
 Conflicts:	glibc-misc < 6:2.7
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define		_libexecdir	%{_libdir}/%{name}
 
 %description
 GNOME Keyring is a program that keeps password and other secrets for
@@ -62,7 +68,7 @@ License:	LGPL v2+
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	dbus-devel >= 1.1.2
-Requires:	glib2-devel >= 1:2.14.1
+Requires:	glib2-devel >= 1:2.16.0
 
 %description devel
 Headers for GNOME keyring library.
@@ -114,12 +120,16 @@ w czasie logowania użytkownika i uruchamiania demona keyring.
 %prep
 %setup -q
 
+sed -i -e 's#sr@Latn#sr@latin#' po/LINGUAS
+mv po/sr@{Latn,latin}.po
+
 %build
 %{__glib_gettextize}
 %{__intltoolize}
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
+%{__autoheader}
 %{__automake}
 %configure \
 	--enable-gtk-doc \
@@ -132,18 +142,21 @@ w czasie logowania użytkownika i uruchamiania demona keyring.
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} install install-pam \
-	DESTDIR=$RPM_BUILD_ROOT \
-	pkgconfigdir=%{_pkgconfigdir}
+	DESTDIR=$RPM_BUILD_ROOT
 
 rm -f $RPM_BUILD_ROOT/%{_lib}/security/pam_gnome_keyring.{l,}a
-rm -f $RPM_BUILD_ROOT%{_libdir}/pam_gnome_keyring*
+rm -f $RPM_BUILD_ROOT%{_libdir}/gnome-keyring/gnome-keyring-pkcs11.{l,}a
 
-[ -d $RPM_BUILD_ROOT%{_datadir}/locale/sr@latin ] || \
-	mv -f $RPM_BUILD_ROOT%{_datadir}/locale/sr@{Latn,latin}
-%find_lang %{name} --with-gnome --all-name
+%find_lang %{name}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%post
+%gconf_schema_install gnome-keyring.schemas
+
+%preun
+%gconf_schema_uninstall gnome-keyring.schemas
 
 %post	libs -p /sbin/ldconfig
 %postun	libs -p /sbin/ldconfig
@@ -152,7 +165,11 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README TODO
 %attr(755,root,root) %{_bindir}/gnome-keyring-daemon
+%dir %{_libdir}/%{name}
 %attr(755,root,root) %{_libexecdir}/%{name}-ask
+%attr(755,root,root) %{_libdir}/%{name}/gnome-keyring-pkcs11.so
+%{_sysconfdir}/gconf/schemas/gnome-keyring.schemas
+%{_datadir}/dbus-1/services/org.gnome.keyring.service
 
 %files libs
 %defattr(644,root,root,755)
