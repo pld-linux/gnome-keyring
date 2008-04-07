@@ -1,17 +1,17 @@
 Summary:	Keep passwords and other user's secrets
 Summary(pl.UTF-8):	Przechowywanie haseł i innych tajnych danych użytkowników
 Name:		gnome-keyring
-Version:	2.22.0
+Version:	2.22.1
 Release:	1
 License:	LGPL v2+ (library), GPL v2+ (programs)
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-keyring/2.22/%{name}-%{version}.tar.bz2
-# Source0-md5:	d27c5bf11579069eb694f93b71364bb4
+# Source0-md5:	4ca9c19fa6ada61cdc93ab24214b5c4f
 URL:		http://live.gnome.org/GnomeKeyring
 BuildRequires:	GConf2-devel >= 2.22.0
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	dbus-devel >= 1.1.2
+BuildRequires:	dbus-devel >= 1.2.0
 BuildRequires:	gettext-devel
 BuildRequires:	gtk+2-devel >= 2:2.12.8
 BuildRequires:	gtk-doc >= 1.8
@@ -25,7 +25,7 @@ BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.197
 BuildRequires:	sed >= 4.0
 Requires(post,preun):	GConf2
-Requires:	dbus >= 1.1.2
+Requires:	dbus >= 1.2.0
 # sr@Latn vs. sr@latin
 Conflicts:	glibc-misc < 6:2.7
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -67,7 +67,7 @@ Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki GNOME keyring
 License:	LGPL v2+
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
-Requires:	dbus-devel >= 1.1.2
+Requires:	dbus-devel >= 1.2.0
 Requires:	glib2-devel >= 1:2.16.0
 
 %description devel
