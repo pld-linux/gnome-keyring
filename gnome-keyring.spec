@@ -1,12 +1,12 @@
 Summary:	Keep passwords and other user's secrets
 Summary(pl.UTF-8):	Przechowywanie haseł i innych tajnych danych użytkowników
 Name:		gnome-keyring
-Version:	2.22.3
+Version:	2.23.5
 Release:	1
 License:	LGPL v2+ (library), GPL v2+ (programs)
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-keyring/2.22/%{name}-%{version}.tar.bz2
-# Source0-md5:	f9e5cd9efac383076aaefc1086520656
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-keyring/2.23/%{name}-%{version}.tar.bz2
+# Source0-md5:	0f643130a83e443d22802c16b6fe3f69
 URL:		http://live.gnome.org/GnomeKeyring
 BuildRequires:	GConf2-devel >= 2.22.0
 BuildRequires:	autoconf
@@ -174,18 +174,25 @@ rm -rf $RPM_BUILD_ROOT
 %files libs
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libgnome-keyring.so.*.*.*
+%attr(755,root,root) %{_libdir}/libgp11.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libgnome-keyring.so.0
+%attr(755,root,root) %ghost %{_libdir}/libgp11.so.0
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libgnome-keyring.so
+%attr(755,root,root) %{_libdir}/libgp11.so
 %{_libdir}/libgnome-keyring.la
+%{_libdir}/libgp11.la
 %{_includedir}/gnome-keyring-1
+%{_includedir}/gp11
 %{_pkgconfigdir}/gnome-keyring-1.pc
+%{_pkgconfigdir}/gp11-0.pc
 
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libgnome-keyring.a
+%{_libdir}/libgp11.a
 
 %files apidocs
 %defattr(644,root,root,755)
