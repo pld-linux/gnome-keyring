@@ -1,12 +1,12 @@
 Summary:	Keep passwords and other user's secrets
 Summary(pl.UTF-8):	Przechowywanie haseł i innych tajnych danych użytkowników
 Name:		gnome-keyring
-Version:	2.23.6
+Version:	2.23.90
 Release:	1
 License:	LGPL v2+ (library), GPL v2+ (programs)
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-keyring/2.23/%{name}-%{version}.tar.bz2
-# Source0-md5:	51183ab3869d851959c265cf86f30ed4
+# Source0-md5:	592bf44e1e554a28c61276515d6f8c4b
 URL:		http://live.gnome.org/GnomeKeyring
 BuildRequires:	GConf2-devel >= 2.22.0
 BuildRequires:	autoconf
@@ -164,6 +164,7 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README TODO
+%attr(755,root,root) %{_bindir}/gnome-keyring
 %attr(755,root,root) %{_bindir}/gnome-keyring-daemon
 %dir %{_libdir}/%{name}
 %attr(755,root,root) %{_libexecdir}/%{name}-ask
