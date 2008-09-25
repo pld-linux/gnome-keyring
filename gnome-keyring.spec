@@ -1,14 +1,14 @@
 Summary:	Keep passwords and other user's secrets
 Summary(pl.UTF-8):	Przechowywanie haseł i innych tajnych danych użytkowników
 Name:		gnome-keyring
-Version:	2.22.3
+Version:	2.24.0
 Release:	1
 License:	LGPL v2+ (library), GPL v2+ (programs)
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-keyring/2.22/%{name}-%{version}.tar.bz2
-# Source0-md5:	f9e5cd9efac383076aaefc1086520656
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-keyring/2.24/%{name}-%{version}.tar.bz2
+# Source0-md5:	b73fca3308b287131a841b45e63a5d16
 URL:		http://live.gnome.org/GnomeKeyring
-BuildRequires:	GConf2-devel >= 2.22.0
+BuildRequires:	GConf2-devel >= 2.24.0
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	dbus-devel >= 1.2.0
@@ -68,7 +68,7 @@ License:	LGPL v2+
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	dbus-devel >= 1.2.0
-Requires:	glib2-devel >= 1:2.16.0
+Requires:	glib2-devel >= 1:2.18.0
 
 %description devel
 Headers for GNOME keyring library.
@@ -120,9 +120,6 @@ w czasie logowania użytkownika i uruchamiania demona keyring.
 %prep
 %setup -q
 
-sed -i -e 's#sr@Latn#sr@latin#' po/LINGUAS
-mv po/sr@{Latn,latin}.po
-
 %build
 %{__glib_gettextize}
 %{__intltoolize}
@@ -164,6 +161,7 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README TODO
+%attr(755,root,root) %{_bindir}/gnome-keyring
 %attr(755,root,root) %{_bindir}/gnome-keyring-daemon
 %dir %{_libdir}/%{name}
 %attr(755,root,root) %{_libexecdir}/%{name}-ask
@@ -174,22 +172,30 @@ rm -rf $RPM_BUILD_ROOT
 %files libs
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libgnome-keyring.so.*.*.*
+%attr(755,root,root) %{_libdir}/libgp11.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libgnome-keyring.so.0
+%attr(755,root,root) %ghost %{_libdir}/libgp11.so.0
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libgnome-keyring.so
+%attr(755,root,root) %{_libdir}/libgp11.so
 %{_libdir}/libgnome-keyring.la
+%{_libdir}/libgp11.la
 %{_includedir}/gnome-keyring-1
+%{_includedir}/gp11
 %{_pkgconfigdir}/gnome-keyring-1.pc
+%{_pkgconfigdir}/gp11-0.pc
 
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libgnome-keyring.a
+%{_libdir}/libgp11.a
 
 %files apidocs
 %defattr(644,root,root,755)
 %{_gtkdocdir}/%{name}
+%{_gtkdocdir}/gp11
 
 %files pam
 %defattr(644,root,root,755)
