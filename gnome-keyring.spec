@@ -119,6 +119,9 @@ w czasie logowania użytkownika i uruchamiania demona keyring.
 %prep
 %setup -q
 
+# no longer provided by libtasn1, waiting for this package to switch to pkgconfig
+sed -ne '/AM_PATH_LIBTASN1/,/^])$/p' aclocal.m4 >> acinclude.m4
+
 %build
 %{__glib_gettextize}
 %{__intltoolize}
@@ -140,8 +143,8 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install install-pam \
 	DESTDIR=$RPM_BUILD_ROOT
 
-rm -f $RPM_BUILD_ROOT/%{_lib}/security/pam_gnome_keyring.{l,}a
-rm -f $RPM_BUILD_ROOT%{_libdir}/gnome-keyring/gnome-keyring-pkcs11.{l,}a
+%{__rm} $RPM_BUILD_ROOT/%{_lib}/security/pam_gnome_keyring.{l,}a
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/gnome-keyring/gnome-keyring-pkcs11.{l,}a
 
 %find_lang %{name}
 
