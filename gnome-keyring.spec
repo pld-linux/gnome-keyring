@@ -1,12 +1,12 @@
 Summary:	Keep passwords and other user's secrets
 Summary(pl.UTF-8):	Przechowywanie haseł i innych tajnych danych użytkowników
 Name:		gnome-keyring
-Version:	2.24.1
+Version:	2.26.0
 Release:	1
 License:	LGPL v2+ (library), GPL v2+ (programs)
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-keyring/2.24/%{name}-%{version}.tar.bz2
-# Source0-md5:	aa5552dc129f3509ee39145b7f0bf977
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-keyring/2.26/%{name}-%{version}.tar.bz2
+# Source0-md5:	0395fcf79b990465030a2795dcddacb9
 URL:		http://live.gnome.org/GnomeKeyring
 BuildRequires:	GConf2-devel >= 2.24.0
 BuildRequires:	autoconf
@@ -52,7 +52,7 @@ z systemem kluczy GNOME.
 Summary:	GNOME keyring library
 Summary(pl.UTF-8):	Biblioteka GNOME keyring
 License:	LGPL v2+
-Group:		Libraries
+Group:		X11/Libraries
 
 %description libs
 GNOME keyring library.
@@ -64,10 +64,11 @@ Biblioteka GNOME keyring.
 Summary:	Headers for GNOME keyring library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki GNOME keyring
 License:	LGPL v2+
-Group:		Development/Libraries
+Group:		X11/Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	dbus-devel >= 1.2.0
-Requires:	glib2-devel >= 1:2.18.0
+Requires:	gtk+2-devel >= 2:2.14.0
+Requires:	libtasn1-devel >= 0.3.4
 
 %description devel
 Headers for GNOME keyring library.
@@ -79,7 +80,7 @@ Pliki nagłówkowe biblioteki GNOME keyring.
 Summary:	Static GNOME keyring libraries
 Summary(pl.UTF-8):	Statyczne biblioteki GNOME keyring
 License:	LGPL v2+
-Group:		Development/Libraries
+Group:		X11/Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
@@ -119,9 +120,6 @@ w czasie logowania użytkownika i uruchamiania demona keyring.
 %prep
 %setup -q
 
-# no longer provided by libtasn1, waiting for this package to switch to pkgconfig
-sed -ne '/AM_PATH_LIBTASN1/,/^])$/p' aclocal.m4 >> acinclude.m4
-
 %build
 %{__glib_gettextize}
 %{__intltoolize}
@@ -145,6 +143,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__rm} $RPM_BUILD_ROOT/%{_lib}/security/pam_gnome_keyring.{l,}a
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/gnome-keyring/gnome-keyring-pkcs11.{l,}a
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/gnome-keyring/{devel,standalone}/*.{la,a}
 
 %find_lang %{name}
 
@@ -168,29 +167,43 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/%{name}
 %attr(755,root,root) %{_libexecdir}/%{name}-ask
 %attr(755,root,root) %{_libdir}/%{name}/gnome-keyring-pkcs11.so
+%dir %{_libdir}/%{name}/devel
+%attr(755,root,root) %{_libdir}/%{name}/devel/gck-ssh-store-standalone.so
+%attr(755,root,root) %{_libdir}/%{name}/devel/gck-user-store-standalone.so
+%dir %{_libdir}/%{name}/standalone
+%attr(755,root,root) %{_libdir}/%{name}/standalone/gck-roots-store-standalone.so
 %{_sysconfdir}/gconf/schemas/gnome-keyring.schemas
+%{_sysconfdir}/xdg/autostart/gnome-keyring-daemon.desktop
 %{_datadir}/dbus-1/services/org.gnome.keyring.service
+%{_datadir}/gcr
 
 %files libs
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libgcr.so.*.*.*
 %attr(755,root,root) %{_libdir}/libgnome-keyring.so.*.*.*
 %attr(755,root,root) %{_libdir}/libgp11.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libgcr.so.0
 %attr(755,root,root) %ghost %{_libdir}/libgnome-keyring.so.0
 %attr(755,root,root) %ghost %{_libdir}/libgp11.so.0
 
 %files devel
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libgcr.so
 %attr(755,root,root) %{_libdir}/libgnome-keyring.so
 %attr(755,root,root) %{_libdir}/libgp11.so
+%{_libdir}/libgcr.la
 %{_libdir}/libgnome-keyring.la
 %{_libdir}/libgp11.la
+%{_includedir}/gcr
 %{_includedir}/gnome-keyring-1
 %{_includedir}/gp11
+%{_pkgconfigdir}/gcr-0.pc
 %{_pkgconfigdir}/gnome-keyring-1.pc
 %{_pkgconfigdir}/gp11-0.pc
 
 %files static
 %defattr(644,root,root,755)
+%{_libdir}/libgcr.a
 %{_libdir}/libgnome-keyring.a
 %{_libdir}/libgp11.a
 
