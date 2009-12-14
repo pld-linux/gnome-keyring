@@ -1,13 +1,12 @@
 Summary:	Keep passwords and other user's secrets
 Summary(pl.UTF-8):	Przechowywanie haseł i innych tajnych danych użytkowników
 Name:		gnome-keyring
-Version:	2.28.0
-Release:	3
+Version:	2.28.2
+Release:	1
 License:	LGPL v2+ (library), GPL v2+ (programs)
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-keyring/2.28/%{name}-%{version}.tar.bz2
-# Source0-md5:	07fa253d8506c22640d74eb4fc90a092
-Patch0:		%{name}-bug-595698.patch
+# Source0-md5:	97ea6823e88b39284187764c1ca95a59
 URL:		http://live.gnome.org/GnomeKeyring
 BuildRequires:	GConf2-devel >= 2.24.0
 BuildRequires:	autoconf
@@ -121,10 +120,9 @@ w czasie logowania użytkownika i uruchamiania demona keyring.
 
 %prep
 %setup -q
-%patch0 -p1
 
-rm -f po/ca@valencia.po
-sed -i -e 's/ca@valencia//' po/LINGUAS
+rm -f po/en@shaw.po
+sed -i -e 's/en@shaw//' po/LINGUAS
 
 %build
 %{__glib_gettextize}
@@ -135,6 +133,7 @@ sed -i -e 's/ca@valencia//' po/LINGUAS
 %{__autoheader}
 %{__automake}
 %configure \
+	--disable-schemas-install \
 	--enable-gtk-doc \
 	--enable-static \
 	--with-html-dir=%{_gtkdocdir} \
