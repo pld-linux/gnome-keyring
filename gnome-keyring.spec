@@ -12,6 +12,7 @@ BuildRequires:	GConf2-devel >= 2.24.0
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	dbus-devel >= 1.2.0
+BuildRequires:	docbook-dtd412-xml
 BuildRequires:	gettext-devel
 BuildRequires:	gtk+2-devel >= 2:2.14.0
 BuildRequires:	gtk-doc >= 1.9
@@ -125,6 +126,7 @@ rm -f po/en@shaw.po
 sed -i -e 's/en@shaw//' po/LINGUAS
 
 %build
+%{__gtkdocize}
 %{__glib_gettextize}
 %{__intltoolize}
 %{__libtoolize}
