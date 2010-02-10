@@ -1,12 +1,12 @@
 Summary:	Keep passwords and other user's secrets
 Summary(pl.UTF-8):	Przechowywanie haseł i innych tajnych danych użytkowników
 Name:		gnome-keyring
-Version:	2.28.2
-Release:	2
+Version:	2.29.90
+Release:	1
 License:	LGPL v2+ (library), GPL v2+ (programs)
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-keyring/2.28/%{name}-%{version}.tar.bz2
-# Source0-md5:	97ea6823e88b39284187764c1ca95a59
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-keyring/2.29/%{name}-%{version}.tar.bz2
+# Source0-md5:	b83675cb9830d9899de4c55df1df2be7
 URL:		http://live.gnome.org/GnomeKeyring
 BuildRequires:	GConf2-devel >= 2.24.0
 BuildRequires:	autoconf
@@ -14,9 +14,8 @@ BuildRequires:	automake
 BuildRequires:	dbus-devel >= 1.2.0
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	gettext-devel
-BuildRequires:	gtk+2-devel >= 2:2.14.0
+BuildRequires:	gtk+2-devel >= 2:2.18.0
 BuildRequires:	gtk-doc >= 1.9
-BuildRequires:	hal-devel >= 0.5.10
 BuildRequires:	intltool >= 0.40.0
 BuildRequires:	libgcrypt-devel >= 1.2.2
 BuildRequires:	libtasn1-devel >= 0.3.4
@@ -69,7 +68,7 @@ License:	LGPL v2+
 Group:		X11/Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	dbus-devel >= 1.2.0
-Requires:	gtk+2-devel >= 2:2.14.0
+Requires:	gtk+2-devel >= 2:2.18.0
 Requires:	libtasn1-devel >= 0.3.4
 
 %description devel
@@ -168,56 +167,52 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog NEWS README TODO
+%doc AUTHORS ChangeLog NEWS README
 %attr(755,root,root) %{_bindir}/gnome-keyring
 %attr(755,root,root) %{_bindir}/gnome-keyring-daemon
 %dir %{_libdir}/%{name}
-%attr(755,root,root) %{_libexecdir}/%{name}-ask
+%attr(755,root,root) %{_libexecdir}/gnome-keyring-prompt
 %attr(755,root,root) %{_libdir}/%{name}/gnome-keyring-pkcs11.so
 %dir %{_libdir}/%{name}/devel
 %attr(755,root,root) %{_libdir}/%{name}/devel/gck-ssh-store-standalone.so
 %attr(755,root,root) %{_libdir}/%{name}/devel/gck-user-store-standalone.so
 %dir %{_libdir}/%{name}/standalone
 %attr(755,root,root) %{_libdir}/%{name}/standalone/gck-roots-store-standalone.so
+%attr(755,root,root) %{_libdir}/%{name}/standalone/gck-secret-store-standalone.so
 %{_sysconfdir}/gconf/schemas/gnome-keyring.schemas
-%{_sysconfdir}/xdg/autostart/gnome-keyring-daemon.desktop
+%{_sysconfdir}/xdg/autostart/gnome-keyring-pkcs11.desktop
+%{_sysconfdir}/xdg/autostart/gnome-keyring-secrets.desktop
+%{_sysconfdir}/xdg/autostart/gnome-keyring-ssh.desktop
 %{_datadir}/dbus-1/services/org.gnome.keyring.service
 %{_datadir}/gcr
+%{_datadir}/gnome-keyring
 
 %files libs
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libgcr.so.*.*.*
-%attr(755,root,root) %{_libdir}/libgnome-keyring.so.*.*.*
 %attr(755,root,root) %{_libdir}/libgp11.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libgcr.so.0
-%attr(755,root,root) %ghost %{_libdir}/libgnome-keyring.so.0
 %attr(755,root,root) %ghost %{_libdir}/libgp11.so.0
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libgcr.so
-%attr(755,root,root) %{_libdir}/libgnome-keyring.so
 %attr(755,root,root) %{_libdir}/libgp11.so
 %{_libdir}/libgcr.la
-%{_libdir}/libgnome-keyring.la
 %{_libdir}/libgp11.la
 %{_includedir}/gcr
-%{_includedir}/gnome-keyring-1
 %{_includedir}/gp11
 %{_pkgconfigdir}/gcr-0.pc
-%{_pkgconfigdir}/gnome-keyring-1.pc
 %{_pkgconfigdir}/gp11-0.pc
 
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libgcr.a
-%{_libdir}/libgnome-keyring.a
 %{_libdir}/libgp11.a
 
 %files apidocs
 %defattr(644,root,root,755)
 %{_gtkdocdir}/gcr
-%{_gtkdocdir}/%{name}
 %{_gtkdocdir}/gp11
 
 %files pam
