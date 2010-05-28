@@ -2,7 +2,7 @@ Summary:	Keep passwords and other user's secrets
 Summary(pl.UTF-8):	Przechowywanie haseł i innych tajnych danych użytkowników
 Name:		gnome-keyring
 Version:	2.30.1
-Release:	1
+Release:	2
 License:	LGPL v2+ (library), GPL v2+ (programs)
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-keyring/2.30/%{name}-%{version}.tar.bz2
@@ -103,18 +103,19 @@ GNOME keyring API documentation.
 %description apidocs -l pl.UTF-8
 Dokumentacja API GNOME keyring.
 
-%package pam
+%package -n pam-pam_gnome_keyring
 Summary:	A PAM module for unlocking keyrings at login time
 Summary(pl.UTF-8):	Moduł PAM do odblokowywania zbiorów kluczy w czasie logowania
 License:	LGPL v2+
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
+Obsoletes:	gnome-keyring-pam
 
-%description pam
+%description -n pam-pam_gnome_keyring
 A PAM module that can automatically unlock the "login" keyring when
 the user logs in and start the keyring daemon.
 
-%description pam -l pl.UTF-8
+%description -n pam-pam_gnome_keyring -l pl.UTF-8
 Moduł PAM, który może automatycznie odblokowywać zbiór kluczy "login"
 w czasie logowania użytkownika i uruchamiania demona keyring.
 
@@ -215,6 +216,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_gtkdocdir}/gcr
 %{_gtkdocdir}/gp11
 
-%files pam
+%files -n pam-pam_gnome_keyring
 %defattr(644,root,root,755)
 %attr(755,root,root) /%{_lib}/security/pam_gnome_keyring.so
