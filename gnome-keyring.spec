@@ -1,12 +1,12 @@
 Summary:	Keep passwords and other user's secrets
 Summary(pl.UTF-8):	Przechowywanie haseł i innych tajnych danych użytkowników
 Name:		gnome-keyring
-Version:	2.32.1
-Release:	2
+Version:	2.91.1
+Release:	0.1
 License:	LGPL v2+ (library), GPL v2+ (programs)
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-keyring/2.32/%{name}-%{version}.tar.bz2
-# Source0-md5:	9a8aa74e03361676f29d6e73155786fc
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-keyring/2.91/%{name}-%{version}.tar.bz2
+# Source0-md5:	1bcd79f0aab7e4c6cf5243895bbd0d7f
 URL:		http://live.gnome.org/GnomeKeyring
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -199,30 +199,38 @@ fi
 %files libs
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libgcr.so.*.*.*
+%attr(755,root,root) %{_libdir}/libgck.so.*.*.*
 %attr(755,root,root) %{_libdir}/libgp11.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libgcr.so.0
+%attr(755,root,root) %ghost %{_libdir}/libgck.so.0
 %attr(755,root,root) %ghost %{_libdir}/libgp11.so.0
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libgcr.so
+%attr(755,root,root) %{_libdir}/libgck.so
 %attr(755,root,root) %{_libdir}/libgp11.so
 %{_libdir}/libgcr.la
+%{_libdir}/libgck.la
 %{_libdir}/libgp11.la
 %{_includedir}/gcr
+%{_includedir}/gck
 %{_includedir}/gp11
 %{_pkgconfigdir}/gcr-0.pc
+%{_pkgconfigdir}/gck-0.pc
 %{_pkgconfigdir}/gp11-0.pc
 
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libgcr.a
+%{_libdir}/libgck.a
 %{_libdir}/libgp11.a
 
 %files apidocs
 %defattr(644,root,root,755)
 %{_gtkdocdir}/gcr-0
-%{_gtkdocdir}/gp11
+%{_gtkdocdir}/gck
+#%{_gtkdocdir}/gp11
 
 %files -n pam-pam_gnome_keyring
 %defattr(644,root,root,755)
