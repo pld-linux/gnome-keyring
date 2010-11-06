@@ -141,6 +141,7 @@ sed -i -e 's/en@shaw//' po/LINGUAS
 	--disable-silent-rules \
 	--enable-gtk-doc \
 	--enable-static \
+	--with-gtk=3.0 \
 	--with-html-dir=%{_gtkdocdir} \
 	--with-pam-dir=/%{_lib}/security
 %{__make}
@@ -175,9 +176,11 @@ fi
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README
 %attr(755,root,root) %{_bindir}/gnome-keyring
+%attr(755,root,root) %{_bindir}/gnome-keyring-3
 %attr(755,root,root) %{_bindir}/gnome-keyring-daemon
 %dir %{_libdir}/%{name}
 %attr(755,root,root) %{_libexecdir}/gnome-keyring-prompt
+%attr(755,root,root) %{_libexecdir}/gnome-keyring-prompt-3
 %attr(755,root,root) %{_libdir}/%{name}/gnome-keyring-pkcs11.so
 %dir %{_libdir}/%{name}/devel
 %attr(755,root,root) %{_libdir}/%{name}/devel/gkm-ssh-store-standalone.so
@@ -192,43 +195,44 @@ fi
 %{_datadir}/GConf/gsettings/*.convert
 %{_datadir}/dbus-1/services/org.freedesktop.secrets.service
 %{_datadir}/dbus-1/services/org.gnome.keyring.service
-%{_datadir}/gcr
+%{_datadir}/gcr-3
 %{_datadir}/glib-2.0/schemas/*.gschema.xml
 %{_datadir}/gnome-keyring
+%{_datadir}/gnome-keyring-3
 
 %files libs
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libgcr.so.*.*.*
+%attr(755,root,root) %{_libdir}/libgcr-3.so.*.*.*
 %attr(755,root,root) %{_libdir}/libgck.so.*.*.*
 %attr(755,root,root) %{_libdir}/libgp11.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libgcr.so.0
+%attr(755,root,root) %ghost %{_libdir}/libgcr-3.so.0
 %attr(755,root,root) %ghost %{_libdir}/libgck.so.0
 %attr(755,root,root) %ghost %{_libdir}/libgp11.so.0
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libgcr.so
+%attr(755,root,root) %{_libdir}/libgcr-3.so
 %attr(755,root,root) %{_libdir}/libgck.so
 %attr(755,root,root) %{_libdir}/libgp11.so
-%{_libdir}/libgcr.la
+%{_libdir}/libgcr-3.la
 %{_libdir}/libgck.la
 %{_libdir}/libgp11.la
-%{_includedir}/gcr
+%{_includedir}/gcr-3
 %{_includedir}/gck
 %{_includedir}/gp11
-%{_pkgconfigdir}/gcr-0.pc
+%{_pkgconfigdir}/gcr-3.pc
 %{_pkgconfigdir}/gck-0.pc
 %{_pkgconfigdir}/gp11-0.pc
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/libgcr.a
+%{_libdir}/libgcr-3.a
 %{_libdir}/libgck.a
 %{_libdir}/libgp11.a
 
 %files apidocs
 %defattr(644,root,root,755)
-%{_gtkdocdir}/gcr-0
+%{_gtkdocdir}/gcr-3
 %{_gtkdocdir}/gck
 #%{_gtkdocdir}/gp11
 
