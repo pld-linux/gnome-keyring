@@ -1,12 +1,12 @@
 Summary:	Keep passwords and other user's secrets
 Summary(pl.UTF-8):	Przechowywanie haseł i innych tajnych danych użytkowników
 Name:		gnome-keyring
-Version:	2.91.1
-Release:	0.1
+Version:	2.91.2
+Release:	1
 License:	LGPL v2+ (library), GPL v2+ (programs)
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-keyring/2.91/%{name}-%{version}.tar.bz2
-# Source0-md5:	1bcd79f0aab7e4c6cf5243895bbd0d7f
+# Source0-md5:	80718c9a0406ffc8ed3d98365ac316d7
 URL:		http://live.gnome.org/GnomeKeyring
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -15,7 +15,7 @@ BuildRequires:	dbus-devel >= 1.2.0
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 1:2.26.0
-BuildRequires:	gtk+2-devel >= 2:2.20.0
+BuildRequires:	gtk+3-devel >= 2.91.0
 BuildRequires:	gtk-doc >= 1.9
 BuildRequires:	intltool >= 0.40.0
 BuildRequires:	libgcrypt-devel >= 1.2.2
@@ -71,7 +71,7 @@ Group:		X11/Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	dbus-devel >= 1.2.0
 Requires:	glib2-devel >= 1:2.26.0
-Requires:	gtk+2-devel >= 2:2.20.0
+Requires:	gtk+3-devel >= 2.91.0
 Requires:	libtasn1-devel >= 0.3.4
 
 %description devel
@@ -204,37 +204,29 @@ fi
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libgcr-3.so.*.*.*
 %attr(755,root,root) %{_libdir}/libgck.so.*.*.*
-%attr(755,root,root) %{_libdir}/libgp11.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libgcr-3.so.0
 %attr(755,root,root) %ghost %{_libdir}/libgck.so.0
-%attr(755,root,root) %ghost %{_libdir}/libgp11.so.0
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libgcr-3.so
 %attr(755,root,root) %{_libdir}/libgck.so
-%attr(755,root,root) %{_libdir}/libgp11.so
 %{_libdir}/libgcr-3.la
 %{_libdir}/libgck.la
-%{_libdir}/libgp11.la
 %{_includedir}/gcr-3
 %{_includedir}/gck
-%{_includedir}/gp11
 %{_pkgconfigdir}/gcr-3.pc
 %{_pkgconfigdir}/gck-0.pc
-%{_pkgconfigdir}/gp11-0.pc
 
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libgcr-3.a
 %{_libdir}/libgck.a
-%{_libdir}/libgp11.a
 
 %files apidocs
 %defattr(644,root,root,755)
 %{_gtkdocdir}/gcr-3
 %{_gtkdocdir}/gck
-#%{_gtkdocdir}/gp11
 
 %files -n pam-pam_gnome_keyring
 %defattr(644,root,root,755)
