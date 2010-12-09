@@ -2,7 +2,7 @@ Summary:	Keep passwords and other user's secrets
 Summary(pl.UTF-8):	Przechowywanie haseł i innych tajnych danych użytkowników
 Name:		gnome-keyring
 Version:	2.32.1
-Release:	2
+Release:	3
 License:	LGPL v2+ (library), GPL v2+ (programs)
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-keyring/2.32/%{name}-%{version}.tar.bz2
@@ -23,7 +23,7 @@ BuildRequires:	libtasn1-devel >= 0.3.4
 BuildRequires:	libtool
 BuildRequires:	pam-devel
 BuildRequires:	pkgconfig
-BuildRequires:	rpmbuild(macros) >= 1.197
+BuildRequires:	rpmbuild(macros) >= 1.592
 BuildRequires:	sed >= 4.0
 Requires(post,postun):	glib2 >= 1:2.26.0
 Requires:	dbus >= 1.2.0
@@ -161,11 +161,11 @@ rm -rf $RPM_BUILD_ROOT
 rm -rf $RPM_BUILD_ROOT
 
 %posttrans
-glib-compile-schemas %{_datadir}/glib-2.0/schemas
+%glib_compile_schemas
 
 %postun
 if [ "$1" = "0" ]; then
-	glib-compile-schemas %{_datadir}/glib-2.0/schemas
+	%glib_compile_schemas
 fi
 
 %post	libs -p /sbin/ldconfig
