@@ -1,12 +1,12 @@
 Summary:	Keep passwords and other user's secrets
 Summary(pl.UTF-8):	Przechowywanie haseł i innych tajnych danych użytkowników
 Name:		gnome-keyring
-Version:	2.91.3
+Version:	2.91.4
 Release:	1
 License:	LGPL v2+ (library), GPL v2+ (programs)
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-keyring/2.91/%{name}-%{version}.tar.bz2
-# Source0-md5:	b6a2ce48d5b520467b7ffae00ec29f16
+# Source0-md5:	76b4f017dafb15f97f90088145d52723
 URL:		http://live.gnome.org/GnomeKeyring
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -15,7 +15,7 @@ BuildRequires:	dbus-devel >= 1.2.0
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 1:2.26.0
-BuildRequires:	gtk+3-devel >= 2.91.0
+BuildRequires:	gtk+3-devel >= 2.91.7
 BuildRequires:	gtk-doc >= 1.9
 BuildRequires:	intltool >= 0.40.0
 BuildRequires:	libgcrypt-devel >= 1.2.2
@@ -71,7 +71,7 @@ Group:		X11/Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	dbus-devel >= 1.2.0
 Requires:	glib2-devel >= 1:2.26.0
-Requires:	gtk+3-devel >= 2.91.0
+Requires:	gtk+3-devel >= 2.91.7
 Requires:	libtasn1-devel >= 0.3.4
 
 %description devel
@@ -153,8 +153,8 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT
 
 %{__rm} $RPM_BUILD_ROOT/%{_lib}/security/pam_gnome_keyring.{l,}a
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/gnome-keyring/gnome-keyring-pkcs11.{l,}a
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/gnome-keyring/{devel,standalone}/*.{la,a}
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/pkcs11/gnome-keyring-pkcs11.{l,}a
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/gnome-keyring/devel/*.{l,}a
 
 %find_lang %{name}
 
@@ -181,13 +181,14 @@ fi
 %dir %{_libdir}/%{name}
 %attr(755,root,root) %{_libexecdir}/gnome-keyring-prompt
 %attr(755,root,root) %{_libexecdir}/gnome-keyring-prompt-3
-%attr(755,root,root) %{_libdir}/%{name}/gnome-keyring-pkcs11.so
+%attr(755,root,root) %{_libdir}/pkcs11/gnome-keyring-pkcs11.so
 %dir %{_libdir}/%{name}/devel
+%attr(755,root,root) %{_libdir}/%{name}/devel/gkm-gnome2-store-standalone.so
+%attr(755,root,root) %{_libdir}/%{name}/devel/gkm-roots-store-standalone.so
+%attr(755,root,root) %{_libdir}/%{name}/devel/gkm-secret-store-standalone.so
 %attr(755,root,root) %{_libdir}/%{name}/devel/gkm-ssh-store-standalone.so
-%attr(755,root,root) %{_libdir}/%{name}/devel/gkm-user-store-standalone.so
-%dir %{_libdir}/%{name}/standalone
-%attr(755,root,root) %{_libdir}/%{name}/standalone/gkm-roots-store-standalone.so
-%attr(755,root,root) %{_libdir}/%{name}/standalone/gkm-secret-store-standalone.so
+%attr(755,root,root) %{_libdir}/%{name}/devel/gkm-xdg-store-standalone.so
+%{_sysconfdir}/xdg/pkcs11.conf.defaults
 %{_sysconfdir}/xdg/autostart/gnome-keyring-gpg.desktop
 %{_sysconfdir}/xdg/autostart/gnome-keyring-pkcs11.desktop
 %{_sysconfdir}/xdg/autostart/gnome-keyring-secrets.desktop
