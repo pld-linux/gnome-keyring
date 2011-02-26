@@ -143,7 +143,8 @@ sed -i -e 's/en@shaw//' po/LINGUAS
 	--enable-static \
 	--with-gtk=3.0 \
 	--with-html-dir=%{_gtkdocdir} \
-	--with-pam-dir=/%{_lib}/security
+	--with-pam-dir=/%{_lib}/security \
+	--with-root-certs=%{_sysconfdir}/certs
 %{__make}
 
 %install
