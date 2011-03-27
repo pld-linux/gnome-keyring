@@ -24,7 +24,6 @@ BuildRequires:	libtool
 BuildRequires:	pam-devel
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.592
-BuildRequires:	sed >= 4.0
 Requires(post,postun):	glib2 >= 1:2.26.0
 Requires:	dbus >= 1.2.0
 Conflicts:	rpm < 4.4.2-0.2
@@ -124,9 +123,6 @@ w czasie logowania użytkownika i uruchamiania demona keyring.
 
 %prep
 %setup -q
-
-rm -f po/en@shaw.po
-sed -i -e 's/en@shaw//' po/LINGUAS
 
 %build
 %{__gtkdocize}
