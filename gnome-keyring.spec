@@ -3,12 +3,12 @@
 Summary:	Keep passwords and other user's secrets
 Summary(pl.UTF-8):	Przechowywanie haseł i innych tajnych danych użytkowników
 Name:		gnome-keyring
-Version:	3.0.3
+Version:	3.1.91
 Release:	1
 License:	LGPL v2+ (library), GPL v2+ (programs)
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-keyring/3.0/%{name}-%{version}.tar.bz2
-# Source0-md5:	4a3bf04f34708e9da249d3078bd36124
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-keyring/3.1/%{name}-%{version}.tar.xz
+# Source0-md5:	49095828e0986c7983eaa0d6a87492dd
 URL:		http://live.gnome.org/GnomeKeyring
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -27,8 +27,15 @@ BuildRequires:	libtool
 BuildRequires:	pam-devel
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.592
+BuildRequires:	tar >= 1:1.22
+BuildRequires:	xz
+Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	glib2 >= 1:2.26.0
+Requires(post,postun):	gtk-update-icon-cache
+Requires(post,postun):	hicolor-icon-theme
+Requires(post,postun):	shared-mime-info
 Requires:	dbus >= 1.2.0
+Requires:	hicolor-icon-theme
 Conflicts:	rpm < 4.4.2-0.2
 # sr@Latn vs. sr@latin
 Conflicts:	glibc-misc < 6:2.7
@@ -141,7 +148,6 @@ w czasie logowania użytkownika i uruchamiania demona keyring.
 	--disable-tests \
 	--enable-gtk-doc \
 	--enable-static \
-	--with-gtk=3.0 \
 	--with-html-dir=%{_gtkdocdir} \
 	--with-pam-dir=/%{_lib}/security \
 	--with-root-certs=%{_sysconfdir}/certs
@@ -163,13 +169,17 @@ rm -rf $RPM_BUILD_ROOT
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%posttrans
+%post
+%update_mime_database
+%update_desktop_database_post
+%update_icon_cache hicolor
 %glib_compile_schemas
 
 %postun
-if [ "$1" = "0" ]; then
-	%glib_compile_schemas
-fi
+%update_mime_database
+%update_desktop_database_postun
+%update_icon_cache hicolor
+%glib_compile_schemas
 
 %post	libs -p /sbin/ldconfig
 %postun	libs -p /sbin/ldconfig
@@ -177,6 +187,7 @@ fi
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README
+%attr(755,root,root) %{_bindir}/gcr-viewer
 %attr(755,root,root) %{_bindir}/gnome-keyring
 %attr(755,root,root) %{_bindir}/gnome-keyring-3
 %attr(755,root,root) %{_bindir}/gnome-keyring-daemon
@@ -200,28 +211,32 @@ fi
 %{_datadir}/gcr-3
 %{_datadir}/glib-2.0/schemas/*.gschema.xml
 %{_datadir}/gnome-keyring-3
+%{_desktopdir}/gcr-viewer.desktop
 %{_desktopdir}/gnome-keyring-prompt.desktop
+/etc/pkcs11/modules/gnome-keyring-module
+/usr/share/icons/hicolor/*/apps/*.png
+/usr/share/mime/packages/gcr-crypto-types.xml
 
 %files libs
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libgcr-3.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libgcr-3.so.0
-%attr(755,root,root) %{_libdir}/libgck.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libgck.so.0
+%attr(755,root,root) %ghost %{_libdir}/libgcr-3.so.1
+%attr(755,root,root) %{_libdir}/libgck-1.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libgck-1.so.0
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libgcr-3.so
-%attr(755,root,root) %{_libdir}/libgck.so
+%attr(755,root,root) %{_libdir}/libgck-1.so
 %{_includedir}/gcr-3
-%{_includedir}/gck
+%{_includedir}/gck-1
 %{_pkgconfigdir}/gcr-3.pc
-%{_pkgconfigdir}/gck-0.pc
+%{_pkgconfigdir}/gck-1.pc
 
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libgcr-3.a
-%{_libdir}/libgck.a
+%{_libdir}/libgck-1.a
 
 %files apidocs
 %defattr(644,root,root,755)
