@@ -1,5 +1,9 @@
 # TODO
 #  Aug 14 13:19:00 haarber gnome-keyring-daemon[6524]: couldn't list keyrings at: /etc/certs: Error opening directory '/etc/certs': Permission denied
+#
+# Conditional build:
+%bcond_with	p11_tests	# PKCS#11 tests
+#
 Summary:	Keep passwords and other user's secrets
 Summary(pl.UTF-8):	Przechowywanie haseł i innych tajnych danych użytkowników
 Name:		gnome-keyring
@@ -10,7 +14,7 @@ Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-keyring/3.2/%{name}-%{version}.tar.xz
 # Source0-md5:	ec1abc290c7a04415c6ad7675ba5de0c
 URL:		http://live.gnome.org/GnomeKeyring
-BuildRequires:	autoconf
+BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
 BuildRequires:	cairo-devel
 BuildRequires:	dbus-devel >= 1.2.0
@@ -22,9 +26,11 @@ BuildRequires:	gtk-doc >= 1.9
 BuildRequires:	intltool >= 0.40.0
 BuildRequires:	libcap-ng-devel
 BuildRequires:	libgcrypt-devel >= 1.2.2
+BuildRequires:	libselinux-devel
 BuildRequires:	libtasn1-devel >= 0.3.4
 BuildRequires:	libtool
 BuildRequires:	p11-kit-devel >= 0.6
+%{?with_p11_tests:BuildRequires:	p11-tests-devel >= 0.1}
 BuildRequires:	pam-devel
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.592
@@ -49,72 +55,77 @@ GNOME Keyring is a program that keeps password and other secrets for
 users. It is run as a daemon in the session, similar to ssh-agent, and
 other applications can locate it by an environment variable.
 
-The library libgnome-keyring is used by applications to integrate with
-the GNOME keyring system.
-
 %description -l pl.UTF-8
 GNOME Keyring to program do przechowywania haseł i innych tajnych
 danych użytkowników. Działa jako demon w sesji, podobnie do
 ssh-agenta, a inne aplikacje mogą znaleźć go poprzez zmienną
 środowiskową.
 
-Biblioteka libgnome-keyring jest używana przez aplikacje do integracji
-z systemem kluczy GNOME.
-
 %package libs
-Summary:	GNOME keyring library
-Summary(pl.UTF-8):	Biblioteka GNOME keyring
+Summary:	GNOME keyring support libraries
+Summary(pl.UTF-8):	Biblioteki wspomagające GNOME keyring
 License:	LGPL v2+
 Group:		X11/Libraries
+Requires:	dbus-libs >= 1.2.0
+Requires:	glib2 >= 1:2.26.0
+Requires:	libgcrypt >= 1.2.2
+Requires:	p11-kit >= 0.6
 
 %description libs
-GNOME keyring library.
+GNOME keyring support libraries:
+- gck: GObject bindings for PKCS#11
+- gcr: GObject and GUI library for high level crypto parsing and
+  display
 
 %description libs -l pl.UTF-8
-Biblioteka GNOME keyring.
+Biblioteki wspomagające GNOME keyring:
+- gck: wiązania GObject do PKCS#11
+- gcr: biblioteka GObject i GUI do wysokopoziomowej analizy i
+  wyświetlania danych związanych z kryptografią.
 
 %package devel
-Summary:	Headers for GNOME keyring library
-Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki GNOME keyring
+Summary:	Headers for GNOME keyring support libraries
+Summary(pl.UTF-8):	Pliki nagłówkowe bibliotek wspomagających GNOME keyring
 License:	LGPL v2+
 Group:		X11/Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	dbus-devel >= 1.2.0
 Requires:	glib2-devel >= 1:2.26.0
 Requires:	gtk+3-devel >= 3.0.0
-Requires:	libtasn1-devel >= 0.3.4
+Requires:	libgcrypt-devel >= 1.2.2
+Requires:	p11-kit-devel >= 0.6
 
 %description devel
-Headers for GNOME keyring library.
+Headers for GNOME keyring support libraries (gck and gcr).
 
 %description devel -l pl.UTF-8
-Pliki nagłówkowe biblioteki GNOME keyring.
+Pliki nagłówkowe bibliotek wspomagających GNOME keyring (gck i gcr).
 
 %package static
-Summary:	Static GNOME keyring libraries
-Summary(pl.UTF-8):	Statyczne biblioteki GNOME keyring
+Summary:	Static GNOME keyring support libraries
+Summary(pl.UTF-8):	Statyczne biblioteki wspomagające GNOME keyring
 License:	LGPL v2+
 Group:		X11/Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
-Static versions of GNOME keyring libraries.
+Static GNOME keyring support libraries (gck and gcr).
 
 %description static -l pl.UTF-8
-Statyczne biblioteki GNOME keyring.
+Statyczne biblioteki wspomagające GNOME keyring (gck i gcr).
 
 %package apidocs
-Summary:	GNOME keyring API documentation
-Summary(pl.UTF-8):	Dokumentacja API GNOME keyring
+Summary:	GNOME keyring (gck and gcr) API documentation
+Summary(pl.UTF-8):	Dokumentacja API GNOME keyring (gck i gcr)
 License:	LGPL v2+
 Group:		Documentation
 Requires:	gtk-doc-common
 
 %description apidocs
-GNOME keyring API documentation.
+GNOME keyring (gck and gcr) API documentation.
 
 %description apidocs -l pl.UTF-8
-Dokumentacja API GNOME keyring.
+Dokumentacja API GNOME keyring (gck i gcr).
 
 %package -n pam-pam_gnome_keyring
 Summary:	A PAM module for unlocking keyrings at login time
@@ -146,6 +157,7 @@ w czasie logowania użytkownika i uruchamiania demona keyring.
 %{__automake}
 %configure \
 	--disable-silent-rules \
+	%{!?with_p11_tests:--disable-p11-tests} \
 	--disable-tests \
 	--enable-gtk-doc \
 	--enable-static \
