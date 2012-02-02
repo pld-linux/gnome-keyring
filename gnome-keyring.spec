@@ -8,7 +8,7 @@ Summary:	Keep passwords and other user's secrets
 Summary(pl.UTF-8):	Przechowywanie haseł i innych tajnych danych użytkowników
 Name:		gnome-keyring
 Version:	3.2.2
-Release:	1
+Release:	2
 License:	LGPL v2+ (library), GPL v2+ (programs)
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-keyring/3.2/%{name}-%{version}.tar.xz
@@ -207,6 +207,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/%{name}
 %attr(755,root,root) %{_libexecdir}/gnome-keyring-prompt
 %attr(755,root,root) %{_libexecdir}/gnome-keyring-prompt-3
+%dir %{_libdir}/pkcs11
 %attr(755,root,root) %{_libdir}/pkcs11/gnome-keyring-pkcs11.so
 %dir %{_libdir}/%{name}/devel
 %attr(755,root,root) %{_libdir}/%{name}/devel/gkm-gnome2-store-standalone.so
