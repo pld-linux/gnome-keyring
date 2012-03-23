@@ -7,7 +7,7 @@
 Summary:	Keep passwords and other user's secrets
 Summary(pl.UTF-8):	Przechowywanie haseł i innych tajnych danych użytkowników
 Name:		gnome-keyring
-Version:	3.3.91
+Version:	3.3.92
 Release:	1
 License:	LGPL v2+ (library), GPL v2+ (programs)
 Group:		X11/Applications
@@ -89,7 +89,6 @@ w czasie logowania użytkownika i uruchamiania demona keyring.
 %configure \
 	--disable-silent-rules \
 	%{!?with_p11_tests:--disable-p11-tests} \
-	--disable-tests \
 	--enable-gtk-doc \
 	--enable-static \
 	--with-html-dir=%{_gtkdocdir} \
