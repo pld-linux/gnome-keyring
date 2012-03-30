@@ -90,7 +90,6 @@ w czasie logowania użytkownika i uruchamiania demona keyring.
 	--disable-silent-rules \
 	%{!?with_p11_tests:--disable-p11-tests} \
 	--enable-gtk-doc \
-	--enable-static \
 	--with-html-dir=%{_gtkdocdir} \
 	--with-pam-dir=/%{_lib}/security \
 	--with-root-certs=%{_sysconfdir}/certs \
@@ -103,9 +102,9 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install install-pam \
 	DESTDIR=$RPM_BUILD_ROOT
 
-%{__rm} $RPM_BUILD_ROOT/%{_lib}/security/pam_gnome_keyring.{l,}a
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/pkcs11/gnome-keyring-pkcs11.{l,}a
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/gnome-keyring/devel/*.{l,}a
+%{__rm} $RPM_BUILD_ROOT/%{_lib}/security/pam_gnome_keyring.la
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/pkcs11/gnome-keyring-pkcs11.la
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/gnome-keyring/devel/*.la
 
 %find_lang %{name}
 
