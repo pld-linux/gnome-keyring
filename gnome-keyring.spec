@@ -7,21 +7,21 @@
 Summary:	Keep passwords and other user's secrets
 Summary(pl.UTF-8):	Przechowywanie haseł i innych tajnych danych użytkowników
 Name:		gnome-keyring
-Version:	3.4.1
+Version:	3.6.0
 Release:	1
 License:	LGPL v2+ (library), GPL v2+ (programs)
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-keyring/3.4/%{name}-%{version}.tar.xz
-# Source0-md5:	607b334b43300465d18676dbc4d97de9
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-keyring/3.6/%{name}-%{version}.tar.xz
+# Source0-md5:	f599cff692a87bcc3ea367169f36156b
 URL:		http://live.gnome.org/GnomeKeyring
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
 BuildRequires:	cairo-devel
 BuildRequires:	dbus-devel >= 1.2.0
 BuildRequires:	docbook-dtd412-xml
-BuildRequires:	gcr-devel >= 3.4.0
+BuildRequires:	gcr-devel >= 3.5.3
 BuildRequires:	gettext-devel
-BuildRequires:	glib2-devel >= 1:2.28.0
+BuildRequires:	glib2-devel >= 1:2.32.0
 BuildRequires:	gtk+3-devel >= 3.0.0
 BuildRequires:	gtk-doc >= 1.9
 BuildRequires:	intltool >= 0.40.0
@@ -140,7 +140,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/dbus-1/services/org.freedesktop.secrets.service
 %{_datadir}/dbus-1/services/org.gnome.keyring.service
 %{_datadir}/glib-2.0/schemas/*.gschema.xml
-%{_sysconfdir}/pkcs11/modules/gnome-keyring-module
+%{_sysconfdir}/pkcs11/modules/gnome-keyring.module
 
 %files -n pam-pam_gnome_keyring
 %defattr(644,root,root,755)
