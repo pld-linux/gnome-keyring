@@ -37,9 +37,12 @@ BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.592
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
-Requires(post,postun):	glib2 >= 1:2.26.0
+Requires(post,postun):	glib2 >= 1:2.32.0
 Requires:	dbus >= 1.2.0
+Requires:	gcr >= 3.5.3
+Requires:	glib2 >= 1:2.32.0
 Requires:	hicolor-icon-theme
+Requires:	libtasn1 >= 0.3.4
 Conflicts:	rpm < 4.4.2-0.2
 # sr@Latn vs. sr@latin
 Conflicts:	glibc-misc < 6:2.7
