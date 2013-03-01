@@ -13,6 +13,7 @@ License:	LGPL v2+ (library), GPL v2+ (programs)
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-keyring/3.6/%{name}-%{version}.tar.xz
 # Source0-md5:	35c6dde6fc31f0ada1d1a332f4b7fa00
+Patch0:		%{name}-am.patch
 URL:		http://live.gnome.org/GnomeKeyring
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
@@ -79,6 +80,7 @@ w czasie logowania użytkownika i uruchamiania demona keyring.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %{__gtkdocize}
