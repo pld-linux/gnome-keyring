@@ -7,13 +7,12 @@
 Summary:	Keep passwords and other user's secrets
 Summary(pl.UTF-8):	Przechowywanie haseł i innych tajnych danych użytkowników
 Name:		gnome-keyring
-Version:	3.6.3
+Version:	3.8.0
 Release:	1
 License:	LGPL v2+ (library), GPL v2+ (programs)
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-keyring/3.6/%{name}-%{version}.tar.xz
-# Source0-md5:	35c6dde6fc31f0ada1d1a332f4b7fa00
-Patch0:		%{name}-am.patch
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-keyring/3.8/%{name}-%{version}.tar.xz
+# Source0-md5:	59758cf9983229b07ffa17da1214d281
 URL:		http://live.gnome.org/GnomeKeyring
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
@@ -80,7 +79,6 @@ w czasie logowania użytkownika i uruchamiania demona keyring.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 %{__gtkdocize}
@@ -133,7 +131,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/%{name}
 %dir %{_libdir}/%{name}/devel
 %attr(755,root,root) %{_libdir}/%{name}/devel/gkm-gnome2-store-standalone.so
-%attr(755,root,root) %{_libdir}/%{name}/devel/gkm-roots-store-standalone.so
 %attr(755,root,root) %{_libdir}/%{name}/devel/gkm-secret-store-standalone.so
 %attr(755,root,root) %{_libdir}/%{name}/devel/gkm-ssh-store-standalone.so
 %attr(755,root,root) %{_libdir}/%{name}/devel/gkm-xdg-store-standalone.so
