@@ -30,7 +30,7 @@ BuildRequires:	libgcrypt-devel >= 1.2.2
 BuildRequires:	libselinux-devel
 BuildRequires:	libtasn1-devel >= 0.3.4
 BuildRequires:	libtool
-BuildRequires:	p11-kit-devel >= 0.6
+BuildRequires:	p11-kit-devel >= 0.16
 %{?with_p11_tests:BuildRequires:	p11-tests-devel >= 0.1}
 BuildRequires:	pam-devel
 BuildRequires:	pkgconfig
@@ -43,6 +43,7 @@ Requires:	gcr >= 3.5.3
 Requires:	glib2 >= 1:2.32.0
 Requires:	hicolor-icon-theme
 Requires:	libtasn1 >= 0.3.4
+Requires:	p11-kit >= 0.16
 Conflicts:	rpm < 4.4.2-0.2
 # sr@Latn vs. sr@latin
 Conflicts:	glibc-misc < 6:2.7
@@ -142,7 +143,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/dbus-1/services/org.freedesktop.secrets.service
 %{_datadir}/dbus-1/services/org.gnome.keyring.service
 %{_datadir}/glib-2.0/schemas/*.gschema.xml
-%{_sysconfdir}/pkcs11/modules/gnome-keyring.module
+%{_datadir}/p11-kit/modules/gnome-keyring.module
 
 %files -n pam-pam_gnome_keyring
 %defattr(644,root,root,755)
