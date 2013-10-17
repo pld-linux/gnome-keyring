@@ -7,12 +7,12 @@
 Summary:	Keep passwords and other user's secrets
 Summary(pl.UTF-8):	Przechowywanie haseł i innych tajnych danych użytkowników
 Name:		gnome-keyring
-Version:	3.10.0
+Version:	3.10.1
 Release:	1
 License:	LGPL v2+ (library), GPL v2+ (programs)
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-keyring/3.10/%{name}-%{version}.tar.xz
-# Source0-md5:	6ec773dbf3bd2d5e666ddbf3103aa0d9
+# Source0-md5:	a0fedbeb11a654975abed45865d3f82d
 URL:		http://live.gnome.org/GnomeKeyring
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
@@ -23,7 +23,6 @@ BuildRequires:	gcr-devel >= 3.5.3
 BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 1:2.32.0
 BuildRequires:	gtk+3-devel >= 3.0.0
-BuildRequires:	gtk-doc >= 1.9
 BuildRequires:	intltool >= 0.40.0
 BuildRequires:	libcap-ng-devel
 BuildRequires:	libgcrypt-devel >= 1.2.2
@@ -82,7 +81,6 @@ w czasie logowania użytkownika i uruchamiania demona keyring.
 %setup -q
 
 %build
-%{__gtkdocize}
 %{__glib_gettextize}
 %{__intltoolize}
 %{__libtoolize}
@@ -93,8 +91,6 @@ w czasie logowania użytkownika i uruchamiania demona keyring.
 %configure \
 	--disable-silent-rules \
 	%{!?with_p11_tests:--disable-p11-tests} \
-	--enable-gtk-doc \
-	--with-html-dir=%{_gtkdocdir} \
 	--with-pam-dir=/%{_lib}/security \
 	--with-root-certs=%{_sysconfdir}/certs \
 	--with-ca-certificates=%{_sysconfdir}/certs/ca-certificates.crt
@@ -144,6 +140,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/dbus-1/services/org.gnome.keyring.service
 %{_datadir}/glib-2.0/schemas/*.gschema.xml
 %{_datadir}/p11-kit/modules/gnome-keyring.module
+%{_mandir}/man1/gnome-keyring-daemon.1*
 
 %files -n pam-pam_gnome_keyring
 %defattr(644,root,root,755)
