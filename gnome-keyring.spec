@@ -38,6 +38,7 @@ BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 Requires(post,postun):	glib2 >= 1:2.32.0
 Requires:	dbus >= 1.2.0
+Requires:	filesystem >= 4.0-28
 Requires:	gcr >= 3.5.3
 Requires:	glib2 >= 1:2.32.0
 Requires:	hicolor-icon-theme
@@ -123,7 +124,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/gnome-keyring
 %attr(755,root,root) %{_bindir}/gnome-keyring-3
 %attr(755,root,root) %{_bindir}/gnome-keyring-daemon
-%dir %{_libdir}/pkcs11
 %attr(755,root,root) %{_libdir}/pkcs11/gnome-keyring-pkcs11.so
 %dir %{_libdir}/%{name}
 %dir %{_libdir}/%{name}/devel
