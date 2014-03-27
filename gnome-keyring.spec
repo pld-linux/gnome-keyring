@@ -7,21 +7,21 @@
 Summary:	Keep passwords and other user's secrets
 Summary(pl.UTF-8):	Przechowywanie haseł i innych tajnych danych użytkowników
 Name:		gnome-keyring
-Version:	3.10.1
-Release:	2
+Version:	3.12.0
+Release:	1
 License:	LGPL v2+ (library), GPL v2+ (programs)
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-keyring/3.10/%{name}-%{version}.tar.xz
-# Source0-md5:	a0fedbeb11a654975abed45865d3f82d
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-keyring/3.12/%{name}-%{version}.tar.xz
+# Source0-md5:	b0e2041c31c68b92f324d1ec7fa9d289
 URL:		http://live.gnome.org/GnomeKeyring
 BuildRequires:	autoconf >= 2.50
-BuildRequires:	automake
+BuildRequires:	automake >= 1:1.12
 BuildRequires:	cairo-devel
 BuildRequires:	dbus-devel >= 1.2.0
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	gcr-devel >= 3.5.3
 BuildRequires:	gettext-devel
-BuildRequires:	glib2-devel >= 1:2.32.0
+BuildRequires:	glib2-devel >= 1:2.38.0
 BuildRequires:	gtk+3-devel >= 3.0.0
 BuildRequires:	intltool >= 0.40.0
 BuildRequires:	libcap-ng-devel
@@ -36,11 +36,11 @@ BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.592
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
-Requires(post,postun):	glib2 >= 1:2.32.0
+Requires(post,postun):	glib2 >= 1:2.38.0
 Requires:	dbus >= 1.2.0
 Requires:	filesystem >= 4.0-28
 Requires:	gcr >= 3.5.3
-Requires:	glib2 >= 1:2.32.0
+Requires:	glib2 >= 1:2.38.0
 Requires:	hicolor-icon-theme
 Requires:	libtasn1 >= 0.3.4
 Requires:	p11-kit >= 0.16
@@ -140,7 +140,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/dbus-1/services/org.gnome.keyring.service
 %{_datadir}/glib-2.0/schemas/*.gschema.xml
 %{_datadir}/p11-kit/modules/gnome-keyring.module
-%{_mandir}/man1/gnome-keyring-daemon.1*
 
 %files -n pam-pam_gnome_keyring
 %defattr(644,root,root,755)
