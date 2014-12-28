@@ -20,7 +20,7 @@ BuildRequires:	cairo-devel
 BuildRequires:	dbus-devel >= 1.2.0
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	gcr-devel >= 3.5.3
-BuildRequires:	gettext-devel
+BuildRequires:	gettext-tools
 BuildRequires:	glib2-devel >= 1:2.38.0
 BuildRequires:	gtk+3-devel >= 3.0.0
 BuildRequires:	intltool >= 0.40.0
