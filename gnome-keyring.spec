@@ -7,12 +7,12 @@
 Summary:	Keep passwords and other user's secrets
 Summary(pl.UTF-8):	Przechowywanie haseł i innych tajnych danych użytkowników
 Name:		gnome-keyring
-Version:	3.16.0
+Version:	3.18.0
 Release:	1
 License:	LGPL v2+ (library), GPL v2+ (programs)
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-keyring/3.16/%{name}-%{version}.tar.xz
-# Source0-md5:	d105927a8dd1791552882744b62351bd
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-keyring/3.18/%{name}-%{version}.tar.xz
+# Source0-md5:	6bdefb3f3ec851d800040c029fdf3f86
 URL:		http://live.gnome.org/GnomeKeyring
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake >= 1:1.12
@@ -131,7 +131,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/%{name}/devel/gkm-secret-store-standalone.so
 %attr(755,root,root) %{_libdir}/%{name}/devel/gkm-ssh-store-standalone.so
 %attr(755,root,root) %{_libdir}/%{name}/devel/gkm-xdg-store-standalone.so
-%{_sysconfdir}/xdg/autostart/gnome-keyring-gpg.desktop
 %{_sysconfdir}/xdg/autostart/gnome-keyring-pkcs11.desktop
 %{_sysconfdir}/xdg/autostart/gnome-keyring-secrets.desktop
 %{_sysconfdir}/xdg/autostart/gnome-keyring-ssh.desktop
