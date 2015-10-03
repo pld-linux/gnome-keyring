@@ -16,17 +16,15 @@ Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-keyring/3.18/%{name}-%{ver
 URL:		http://live.gnome.org/GnomeKeyring
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake >= 1:1.12
-BuildRequires:	cairo-devel
-BuildRequires:	dbus-devel >= 1.2.0
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	gcr-devel >= 3.5.3
 BuildRequires:	gettext-tools
 BuildRequires:	glib2-devel >= 1:2.38.0
-BuildRequires:	gtk+3-devel >= 3.0.0
 BuildRequires:	intltool >= 0.40.0
 BuildRequires:	libcap-ng-devel
 BuildRequires:	libgcrypt-devel >= 1.2.2
 BuildRequires:	libselinux-devel
+# for some test only
 BuildRequires:	libtasn1-devel >= 0.3.4
 BuildRequires:	libtool
 BuildRequires:	p11-kit-devel >= 0.16
@@ -37,12 +35,10 @@ BuildRequires:	rpmbuild(macros) >= 1.592
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 Requires(post,postun):	glib2 >= 1:2.38.0
-Requires:	dbus >= 1.2.0
 Requires:	filesystem >= 4.0-28
 Requires:	gcr >= 3.5.3
 Requires:	glib2 >= 1:2.38.0
 Requires:	hicolor-icon-theme
-Requires:	libtasn1 >= 0.3.4
 Requires:	p11-kit >= 0.16
 Conflicts:	rpm < 4.4.2-0.2
 # sr@Latn vs. sr@latin
@@ -134,10 +130,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_sysconfdir}/xdg/autostart/gnome-keyring-pkcs11.desktop
 %{_sysconfdir}/xdg/autostart/gnome-keyring-secrets.desktop
 %{_sysconfdir}/xdg/autostart/gnome-keyring-ssh.desktop
-%{_datadir}/GConf/gsettings/*.convert
+%{_datadir}/GConf/gsettings/org.gnome.crypto.cache.convert
 %{_datadir}/dbus-1/services/org.freedesktop.secrets.service
 %{_datadir}/dbus-1/services/org.gnome.keyring.service
-%{_datadir}/glib-2.0/schemas/*.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.gnome.crypto.cache.gschema.xml
 %{_datadir}/p11-kit/modules/gnome-keyring.module
 %{_mandir}/man1/gnome-keyring.1*
 %{_mandir}/man1/gnome-keyring-3.1*
