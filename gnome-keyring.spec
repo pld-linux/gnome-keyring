@@ -8,7 +8,7 @@ Summary:	Keep passwords and other user's secrets
 Summary(pl.UTF-8):	Przechowywanie haseł i innych tajnych danych użytkowników
 Name:		gnome-keyring
 Version:	3.28.0
-Release:	1
+Release:	2
 License:	LGPL v2+ (library), GPL v2+ (programs)
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-keyring/3.28/%{name}-%{version}.tar.xz
@@ -26,6 +26,8 @@ BuildRequires:	libselinux-devel
 # for some test only
 BuildRequires:	libtasn1-devel >= 0.3.4
 BuildRequires:	libtool
+# checks for ssh-add and ssh-agent
+BuildRequires:	openssh-clients
 BuildRequires:	p11-kit-devel >= 0.16
 %{?with_p11_tests:BuildRequires:	p11-tests-devel >= 0.1}
 BuildRequires:	pam-devel
