@@ -7,20 +7,19 @@
 Summary:	Keep passwords and other user's secrets
 Summary(pl.UTF-8):	Przechowywanie haseł i innych tajnych danych użytkowników
 Name:		gnome-keyring
-Version:	3.20.1
+Version:	3.28.0
 Release:	1
 License:	LGPL v2+ (library), GPL v2+ (programs)
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-keyring/3.20/%{name}-%{version}.tar.xz
-# Source0-md5:	9b4b2c59dc1db3a1309cbe1fa1f2c2e7
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-keyring/3.28/%{name}-%{version}.tar.xz
+# Source0-md5:	b7481514065872bd1845609a2ef576c6
 URL:		http://live.gnome.org/GnomeKeyring
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake >= 1:1.12
 BuildRequires:	docbook-dtd412-xml
-BuildRequires:	gcr-devel >= 3.5.3
-BuildRequires:	gettext-tools
-BuildRequires:	glib2-devel >= 1:2.38.0
-BuildRequires:	intltool >= 0.40.0
+BuildRequires:	gcr-devel >= 3.28.0
+BuildRequires:	gettext-tools >= 0.19.8
+BuildRequires:	glib2-devel >= 1:2.44.0
 BuildRequires:	libcap-ng-devel
 BuildRequires:	libgcrypt-devel >= 1.2.2
 BuildRequires:	libselinux-devel
@@ -36,8 +35,8 @@ BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 Requires(post,postun):	glib2 >= 1:2.38.0
 Requires:	filesystem >= 4.0-28
-Requires:	gcr >= 3.5.3
-Requires:	glib2 >= 1:2.38.0
+Requires:	gcr >= 3.28.0
+Requires:	glib2 >= 1:2.44.0
 Requires:	hicolor-icon-theme
 Requires:	p11-kit >= 0.16
 Conflicts:	rpm < 4.4.2-0.2
@@ -78,8 +77,6 @@ w czasie logowania użytkownika i uruchamiania demona keyring.
 %setup -q
 
 %build
-%{__glib_gettextize}
-%{__intltoolize}
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
@@ -88,9 +85,7 @@ w czasie logowania użytkownika i uruchamiania demona keyring.
 %configure \
 	--disable-silent-rules \
 	%{!?with_p11_tests:--disable-p11-tests} \
-	--with-pam-dir=/%{_lib}/security \
-	--with-root-certs=%{_sysconfdir}/certs \
-	--with-ca-certificates=%{_sysconfdir}/certs/ca-certificates.crt
+	--with-pam-dir=/%{_lib}/security
 %{__make}
 
 %install
@@ -134,7 +129,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/dbus-1/services/org.freedesktop.secrets.service
 %{_datadir}/dbus-1/services/org.gnome.keyring.service
 %{_datadir}/glib-2.0/schemas/org.gnome.crypto.cache.gschema.xml
-%{_datadir}/p11-kit/modules/gnome-keyring.module
 %{_mandir}/man1/gnome-keyring.1*
 %{_mandir}/man1/gnome-keyring-3.1*
 %{_mandir}/man1/gnome-keyring-daemon.1*
