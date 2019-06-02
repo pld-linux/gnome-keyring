@@ -26,8 +26,6 @@ BuildRequires:	libselinux-devel
 # for some test only
 BuildRequires:	libtasn1-devel >= 0.3.4
 BuildRequires:	libtool
-# checks for ssh-add and ssh-agent
-BuildRequires:	openssh-clients
 BuildRequires:	p11-kit-devel >= 0.16
 %{?with_p11_tests:BuildRequires:	p11-tests-devel >= 0.1}
 BuildRequires:	pam-devel
@@ -85,6 +83,8 @@ w czasie logowania użytkownika i uruchamiania demona keyring.
 %{__autoheader}
 %{__automake}
 %configure \
+	SSH_ADD="/usr/bin/ssh-add" \
+	SSH_AGENT="/usr/bin/ssh-agent" \
 	--disable-silent-rules \
 	%{!?with_p11_tests:--disable-p11-tests} \
 	--with-pam-dir=/%{_lib}/security
