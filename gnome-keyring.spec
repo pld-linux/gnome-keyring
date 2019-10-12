@@ -13,7 +13,7 @@ License:	LGPL v2+ (library), GPL v2+ (programs)
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-keyring/3.34/%{name}-%{version}.tar.xz
 # Source0-md5:	7c8fd85e46ed4ba1add0288b2ead9aec
-URL:		http://live.gnome.org/GnomeKeyring
+URL:		https://wiki.gnome.org/Projects/GnomeKeyring
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake >= 1:1.12
 BuildRequires:	docbook-dtd412-xml
@@ -33,11 +33,12 @@ BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.592
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
-Requires(post,postun):	glib2 >= 1:2.38.0
+Requires(post,postun):	glib2 >= 1:2.44.0
 Requires:	filesystem >= 4.0-28
 Requires:	gcr >= 3.28.0
 Requires:	glib2 >= 1:2.44.0
 Requires:	hicolor-icon-theme
+Requires:	libgcrypt >= 1.2.2
 Requires:	p11-kit >= 0.16
 Conflicts:	rpm < 4.4.2-0.2
 # sr@Latn vs. sr@latin
