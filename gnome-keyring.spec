@@ -26,6 +26,7 @@ BuildRequires:	libselinux-devel
 # for some test only
 BuildRequires:	libtasn1-devel >= 0.3.4
 BuildRequires:	libtool
+BuildRequires:	libxslt-progs
 BuildRequires:	p11-kit-devel >= 0.16
 %{?with_p11_tests:BuildRequires:	p11-tests-devel >= 0.1}
 BuildRequires:	pam-devel
@@ -41,11 +42,7 @@ Requires:	hicolor-icon-theme
 Requires:	libgcrypt >= 1.2.2
 Requires:	p11-kit >= 0.16
 Conflicts:	rpm < 4.4.2-0.2
-# sr@Latn vs. sr@latin
-Conflicts:	glibc-misc < 6:2.7
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
-%define		_libexecdir	%{_libdir}/%{name}
 
 %description
 GNOME Keyring is a program that keeps password and other secrets for
@@ -64,7 +61,7 @@ Summary(pl.UTF-8):	Moduł PAM do odblokowywania zbiorów kluczy w czasie logowan
 License:	LGPL v2+
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
-Obsoletes:	gnome-keyring-pam
+Obsoletes:	gnome-keyring-pam < 2.30.1-2
 
 %description -n pam-pam_gnome_keyring
 A PAM module that can automatically unlock the "login" keyring when
