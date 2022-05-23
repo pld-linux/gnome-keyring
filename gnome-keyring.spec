@@ -18,6 +18,7 @@ BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake >= 1:1.12
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	gcr-devel >= 3.28.0
+BuildRequires:	gcr-ui-devel >= 3.28.0
 BuildRequires:	gettext-tools >= 0.19.8
 BuildRequires:	glib2-devel >= 1:2.44.0
 BuildRequires:	libcap-ng-devel
