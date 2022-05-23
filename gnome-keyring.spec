@@ -7,12 +7,13 @@
 Summary:	Keep passwords and other user's secrets
 Summary(pl.UTF-8):	Przechowywanie haseł i innych tajnych danych użytkowników
 Name:		gnome-keyring
-Version:	40.0
-Release:	2
+Version:	42.0
+Release:	1
 License:	LGPL v2+ (library), GPL v2+ (programs)
 Group:		X11/Applications
-Source0:	https://download.gnome.org/sources/gnome-keyring/40/%{name}-%{version}.tar.xz
-# Source0-md5:	f404b61683a0ff54fb264b337772cff2
+Source0:	https://download.gnome.org/sources/gnome-keyring/42/%{name}-%{version}.tar.xz
+# Source0-md5:	dd3a191a2f61a14ca67ad6e2a3e6287e
+Patch0:		%{name}-missing.patch
 URL:		https://wiki.gnome.org/Projects/GnomeKeyring
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake >= 1:1.12
@@ -33,6 +34,7 @@ BuildRequires:	p11-kit-devel >= 0.16
 BuildRequires:	pam-devel
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.592
+BuildRequires:	systemd-devel >= 1:209
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 Requires(post,postun):	glib2 >= 1:2.44.0
@@ -74,6 +76,10 @@ w czasie logowania użytkownika i uruchamiania demona keyring.
 
 %prep
 %setup -q
+%patch0 -p1
+
+# paths to developer's home embedded, force regeneration
+%{__rm} daemon/dbus/gkd-*-generated.[ch]
 
 %build
 %{__libtoolize}
@@ -131,11 +137,13 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/dbus-1/services/org.freedesktop.secrets.service
 %{_datadir}/dbus-1/services/org.gnome.keyring.service
 %{_datadir}/glib-2.0/schemas/org.gnome.crypto.cache.gschema.xml
+%{_datadir}/p11-kit/modules/gnome-keyring.module
+%{_datadir}/xdg-desktop-portal/portals/gnome-keyring.portal
+%{systemduserunitdir}/gnome-keyring-daemon.service
+%{systemduserunitdir}/gnome-keyring-daemon.socket
 %{_mandir}/man1/gnome-keyring.1*
 %{_mandir}/man1/gnome-keyring-3.1*
 %{_mandir}/man1/gnome-keyring-daemon.1*
-%{_datadir}/p11-kit/modules/gnome-keyring.module
-%{_datadir}/xdg-desktop-portal/portals/gnome-keyring.portal
 
 %files -n pam-pam_gnome_keyring
 %defattr(644,root,root,755)
