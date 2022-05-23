@@ -7,13 +7,12 @@
 Summary:	Keep passwords and other user's secrets
 Summary(pl.UTF-8):	Przechowywanie haseł i innych tajnych danych użytkowników
 Name:		gnome-keyring
-Version:	42.0
+Version:	42.1
 Release:	1
 License:	LGPL v2+ (library), GPL v2+ (programs)
 Group:		X11/Applications
 Source0:	https://download.gnome.org/sources/gnome-keyring/42/%{name}-%{version}.tar.xz
-# Source0-md5:	dd3a191a2f61a14ca67ad6e2a3e6287e
-Patch0:		%{name}-missing.patch
+# Source0-md5:	8728a6d344f29c545d9d31cb5c708f14
 URL:		https://wiki.gnome.org/Projects/GnomeKeyring
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake >= 1:1.12
@@ -76,10 +75,6 @@ w czasie logowania użytkownika i uruchamiania demona keyring.
 
 %prep
 %setup -q
-%patch0 -p1
-
-# paths to developer's home embedded, force regeneration
-%{__rm} daemon/dbus/gkd-*-generated.[ch]
 
 %build
 %{__libtoolize}
