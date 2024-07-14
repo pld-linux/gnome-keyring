@@ -17,6 +17,7 @@ URL:		https://wiki.gnome.org/Projects/GnomeKeyring
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake >= 1:1.12
 BuildRequires:	docbook-dtd412-xml
+BuildRequires:	docbook-style-xsl-nons
 BuildRequires:	gcr-devel >= 3.28.0
 BuildRequires:	gcr-ui-devel >= 3.28.0
 BuildRequires:	gettext-tools >= 0.19.8
