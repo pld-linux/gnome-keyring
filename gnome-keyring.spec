@@ -33,7 +33,7 @@ BuildRequires:	p11-kit-devel >= 0.16
 %{?with_p11_tests:BuildRequires:	p11-tests-devel >= 0.1}
 BuildRequires:	pam-devel
 BuildRequires:	pkgconfig
-BuildRequires:	rpmbuild(macros) >= 1.592
+BuildRequires:	rpmbuild(macros) >= 1.682
 BuildRequires:	systemd-devel >= 1:209
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
