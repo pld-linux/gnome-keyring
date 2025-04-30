@@ -7,40 +7,41 @@
 Summary:	Keep passwords and other user's secrets
 Summary(pl.UTF-8):	Przechowywanie haseł i innych tajnych danych użytkowników
 Name:		gnome-keyring
-Version:	46.2
+Version:	48.0
 Release:	1
 License:	LGPL v2+ (library), GPL v2+ (programs)
 Group:		X11/Applications
-Source0:	https://download.gnome.org/sources/gnome-keyring/46/%{name}-%{version}.tar.xz
-# Source0-md5:	7a8ab16a87f03ca05fc176925fcce649
+Source0:	https://download.gnome.org/sources/gnome-keyring/48/%{name}-%{version}.tar.xz
+# Source0-md5:	d19a99eadeb5d92774b7960c51d1c5dc
 URL:		https://wiki.gnome.org/Projects/GnomeKeyring
-BuildRequires:	autoconf >= 2.50
-BuildRequires:	automake >= 1:1.12
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	docbook-style-xsl-nons
 BuildRequires:	gcr-devel >= 3.28.0
 BuildRequires:	gcr-ui-devel >= 3.28.0
 BuildRequires:	gettext-tools >= 0.19.8
-BuildRequires:	glib2-devel >= 1:2.44.0
+BuildRequires:	glib2-devel >= 1:2.80
 BuildRequires:	libcap-ng-devel
 BuildRequires:	libgcrypt-devel >= 1.2.2
 BuildRequires:	libselinux-devel
 # for some test only
 BuildRequires:	libtasn1-devel >= 0.3.4
-BuildRequires:	libtool
 BuildRequires:	libxslt-progs
+BuildRequires:	meson >= 1.0
+BuildRequires:	ninja >= 1.5
+# for ssh-agent,ssh-add binaries detection by meson
+BuildRequires:	openssh-clients
 BuildRequires:	p11-kit-devel >= 0.16
 %{?with_p11_tests:BuildRequires:	p11-tests-devel >= 0.1}
 BuildRequires:	pam-devel
 BuildRequires:	pkgconfig
-BuildRequires:	rpmbuild(macros) >= 1.682
+BuildRequires:	rpmbuild(macros) >= 2.042
 BuildRequires:	systemd-devel >= 1:209
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
-Requires(post,postun):	glib2 >= 1:2.44.0
+Requires(post,postun):	glib2 >= 1:2.80
 Requires:	filesystem >= 4.0-28
 Requires:	gcr >= 3.28.0
-Requires:	glib2 >= 1:2.44.0
+Requires:	glib2 >= 1:2.80
 Requires:	hicolor-icon-theme
 Requires:	libgcrypt >= 1.2.2
 Requires:	p11-kit >= 0.16
@@ -78,29 +79,21 @@ w czasie logowania użytkownika i uruchamiania demona keyring.
 %setup -q
 
 %build
-%{__libtoolize}
-%{__aclocal}
-%{__autoconf}
-%{__autoheader}
-%{__automake}
-%configure \
-	SSH_ADD="/usr/bin/ssh-add" \
-	SSH_AGENT="/usr/bin/ssh-agent" \
-	--disable-silent-rules \
-	%{!?with_p11_tests:--disable-p11-tests} \
-	--enable-ssh-agent \
-	--with-pam-dir=/%{_lib}/security
-%{__make}
+%meson \
+	-Dselinux=enabled \
+	-Dssh-agent=true \
+	-Dsystemd=enabled
+
+%meson_build
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} install install-pam \
-	DESTDIR=$RPM_BUILD_ROOT
+%meson_install
 
-%{__rm} $RPM_BUILD_ROOT/%{_lib}/security/pam_gnome_keyring.la
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/pkcs11/gnome-keyring-pkcs11.la
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/gnome-keyring/devel/*.la
+# meson.build doesn't support split /usr, adjust manually
+install -d $RPM_BUILD_ROOT/%{_lib}
+%{__mv} $RPM_BUILD_ROOT%{_libdir}/security $RPM_BUILD_ROOT/%{_lib}
 
 %find_lang %{name}
 
@@ -115,7 +108,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog NEWS README
+%doc NEWS README
 %attr(755,root,root) %{_bindir}/gnome-keyring
 %attr(755,root,root) %{_bindir}/gnome-keyring-3
 %attr(755,root,root) %{_bindir}/gnome-keyring-daemon
