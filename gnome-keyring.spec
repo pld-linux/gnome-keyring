@@ -7,14 +7,14 @@
 Summary:	Keep passwords and other user's secrets
 Summary(pl.UTF-8):	Przechowywanie haseł i innych tajnych danych użytkowników
 Name:		gnome-keyring
-Version:	48.0
+Version:	50.0
 Release:	1
 License:	LGPL v2+ (library), GPL v2+ (programs)
 Group:		X11/Applications
-Source0:	https://download.gnome.org/sources/gnome-keyring/48/%{name}-%{version}.tar.xz
-# Source0-md5:	d19a99eadeb5d92774b7960c51d1c5dc
+Source0:	https://download.gnome.org/sources/gnome-keyring/50/%{name}-%{version}.tar.xz
+# Source0-md5:	406fb764c664de580a091527af059750
 URL:		https://wiki.gnome.org/Projects/GnomeKeyring
-BuildRequires:	docbook-dtd412-xml
+BuildRequires:	docbook-dtd43-xml
 BuildRequires:	docbook-style-xsl-nons
 BuildRequires:	gcr-devel >= 3.28.0
 BuildRequires:	gcr-ui-devel >= 3.28.0
@@ -80,6 +80,7 @@ w czasie logowania użytkownika i uruchamiania demona keyring.
 
 %build
 %meson \
+	-Dlibcap-ng=enabled \
 	-Dselinux=enabled \
 	-Dssh-agent=true \
 	-Dsystemd=enabled
@@ -112,13 +113,13 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/gnome-keyring
 %attr(755,root,root) %{_bindir}/gnome-keyring-3
 %attr(755,root,root) %{_bindir}/gnome-keyring-daemon
-%attr(755,root,root) %{_libdir}/pkcs11/gnome-keyring-pkcs11.so
+%{_libdir}/pkcs11/gnome-keyring-pkcs11.so
 %dir %{_libdir}/%{name}
 %dir %{_libdir}/%{name}/devel
-%attr(755,root,root) %{_libdir}/%{name}/devel/gkm-gnome2-store-standalone.so
-%attr(755,root,root) %{_libdir}/%{name}/devel/gkm-secret-store-standalone.so
-%attr(755,root,root) %{_libdir}/%{name}/devel/gkm-ssh-store-standalone.so
-%attr(755,root,root) %{_libdir}/%{name}/devel/gkm-xdg-store-standalone.so
+%{_libdir}/%{name}/devel/gkm-gnome2-store-standalone.so
+%{_libdir}/%{name}/devel/gkm-secret-store-standalone.so
+%{_libdir}/%{name}/devel/gkm-ssh-store-standalone.so
+%{_libdir}/%{name}/devel/gkm-xdg-store-standalone.so
 %{_sysconfdir}/xdg/autostart/gnome-keyring-pkcs11.desktop
 %{_sysconfdir}/xdg/autostart/gnome-keyring-secrets.desktop
 %{_sysconfdir}/xdg/autostart/gnome-keyring-ssh.desktop
@@ -137,4 +138,4 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n pam-pam_gnome_keyring
 %defattr(644,root,root,755)
-%attr(755,root,root) /%{_lib}/security/pam_gnome_keyring.so
+/%{_lib}/security/pam_gnome_keyring.so
